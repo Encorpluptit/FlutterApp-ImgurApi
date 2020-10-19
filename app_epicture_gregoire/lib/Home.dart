@@ -18,40 +18,61 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<ImgurGallery> gallery = new List<ImgurGallery>();
-  bool hasdata = false;
+  int page = 0;
+  bool end = false;
 
   FutureBuilder<List<ImgurGallery>> hello() {
     return FutureBuilder<List<ImgurGallery>>(
       future: widget.user.getGallery(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          gallery.addAll(snapshot.data);
-          return ListView(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  for (var item in gallery)
-                    if (item.images.first.mp4_size == null)
-                      HomeCard(
-                        urlpicture: item.images.first.link,
-                        customHeigh: item.images.first.height,
-                      ),
+          if (page == 0) {
+            gallery.addAll(snapshot.data);
+            page += 1;
+          }
+          return NotificationListener<ScrollNotification>(
+              child: ListView(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      for (var item in gallery)
+                        if (item.images.first.mp4_size == null)
+                          HomeCard(
+                            urlpicture: item.images.first.link,
+                            customHeigh: item.images.first.height,
+                          ),
+                    ],
+                  )
                 ],
-              )
-            ],
-          );
+              ),
+              onNotification: (notification) {
+                if (end == false &&
+                    notification.metrics.pixels ==
+                        notification.metrics.maxScrollExtent) {
+                  end = true;
+                  _loadMoreItems(page);
+                }
+                return true;
+              });
         } else if (snapshot.hasError) {
           print('error');
           return Text("${snapshot.hasError}");
         }
-        print("circular");
         return CircularProgressIndicator();
       },
     );
   }
 
-  void updateGallery(List<ImgurGallery> filler) {}
+  Future _loadMoreItems(int page) async {
+    List<ImgurGallery> tmp = await widget.user.getGallery();
+    setState(() {
+      // gallery.clear();
+      gallery.addAll(tmp);
+      end = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -59,86 +80,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-// class Home extends StatelessWidget {
-//   BasicCall user;
-//   List<ImgurGallery> gallery;
-//   Home({this.user});
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: FutureBuilder<List<ImgurGallery>>(
-//         future: user.getGallery(),
-//         builder: (context, snapshot) {
-//           if (snapshot.hasData) {
-//             gallery = snapshot.data;
-//             return ListView(
-//               children: [
-//                 Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: <Widget>[
-//                     for (var item in snapshot.data)
-//                       if (item.images.first.mp4_size == null)
-//                         HomeCard(
-//                           urlpicture: item.images.first.link,
-//                           customHeigh: item.images.first.height,
-//                         ),
-//                   ],
-//                 )
-//               ],
-//             );
-//           } else if (snapshot.hasError) {
-//             print('error');
-//             return Text("${snapshot.error}");
-//           }
-//           return CircularProgressIndicator();
-//         },
-//       ),
-//     );
-//   }
-// }
-
-// class Home extends StatefulWidget {
-//   List<ImgurGallery> homeGalery;
-//   @override
-//   _HomeState createState() => _HomeState();
-// }
-
-// class _HomeState extends State<Home> {
-//   @override
-//   void initState() {
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: FutureBuilder<List<ImgurGallery>>(
-//         future: futureAlbum,
-//         builder: (context, snapshot) {
-//           if (snapshot.hasData) {
-//             return ListView(
-//               children: [
-//                 Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: <Widget>[
-//                     for (var item in snapshot.data)
-//                       if (item.images.first.mp4_size == null)
-//                         HomeCard(
-//                           urlpicture: item.images.first.link,
-//                           customHeigh: item.images.first.height,
-//                         ),
-//                   ],
-//                 )
-//               ],
-//             );
-//           } else if (snapshot.hasError) {
-//             print('error');
-//             return Text("${snapshot.error}");
-//           }
-//           return CircularProgressIndicator();
-//         },
-//       ),
-//     );
-//   }
-// }
