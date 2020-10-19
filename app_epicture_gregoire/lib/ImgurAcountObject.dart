@@ -3,11 +3,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'HomeCard.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'ImgurGaleryObject.dart';
-import 'dart:io';
 
 class ImgurAccountBase {
   final String accessToken;
@@ -52,5 +47,17 @@ class ImgurAccountBase {
         url: json['url'],
         user_follow: json['user_follow']['status'],
         cover: json['cover']);
+  }
+
+  Future<List<ImgurGallery>> getPersonalImages() async {
+    final response = await http.get(
+      "https://api.imgur.com/3/account/$url/images",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
+    );
+    print("json value");
+    return json
+        .decode(response.body)['data']
+        .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
+        .toList();
   }
 }

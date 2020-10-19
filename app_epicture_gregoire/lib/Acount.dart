@@ -1,68 +1,74 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'ImgurAcountObject.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'HomeCard.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'ImgurGaleryObject.dart';
-import 'dart:io';
 
 class Acount extends StatelessWidget {
-  final String username;
-  const Acount({this.username});
+  ImgurAccountBase account;
+  Acount({this.account});
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(username),
+      child: FutureBuilder<List<ImgurGallery>>(
+          future: account.getPersonalImages(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              print('tezezmklre');
+              inspect(snapshot.data);
+              return GridView.count(
+                // Create a grid with 2 columns. If you change the scrollDirection to
+                // horizontal, this produces 2 rows.
+                crossAxisCount: 2,
+                // Generate 100 widgets that display their index in the List.
+                children: List.generate(snapshot.data.length, (index) {
+                  return Center(
+                    child: Image.network(
+                        snapshot.data.elementAt(index).images.first.link),
+                  );
+                }),
+              );
+            } else if (snapshot.hasError) {
+              print('error');
+              return Text("${snapshot.error}");
+            }
+            print("lol");
+            return CircularProgressIndicator();
+          }),
     );
   }
+
+  // Widget hello() {
+  //   print("hello function");
+  //   FutureBuilder<List<ImgurGallery>>(
+  //       future: account.getPersonalImages(),
+  //       builder: (context, snapshot) {
+  //         if (snapshot.hasData) {
+  //           print('tezezmklre');
+  //           print(snapshot.data);
+  //           return ListView(
+  //             children: [
+  //               Column(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: <Widget>[
+  //                   for (var item in snapshot.data)
+  //                     if (item.images.first.mp4_size == null)
+  //                       HomeCard(
+  //                         urlpicture: item.images.first.link,
+  //                         customHeigh: item.images.first.height,
+  //                       ),
+  //                 ],
+  //               )
+  //             ],
+  //           );
+  //         } else if (snapshot.hasError) {
+  //           print('error');
+  //           return Text("${snapshot.error}");
+  //         }
+  //         print("lol");
+  //         return CircularProgressIndicator();
+  //       });
+  //   print('fair enoth');
+  // }
 }
-
-// class Acount extends StatefulWidget {
-//   //acount username
-//   //acount client-IDs
-//   final String username;
-//   const Acount({this.username});
-//   @override
-//   _AcountState createState() => _AcountState();
-// }
-
-// class _AcountState extends State<Acount> {
-//   // Future<ImgurAccountBase> acountValue;
-
-//   // @override
-//   // void initState() {
-//   //   super.initState();
-//   //   acountValue = getSelfAccount();
-//   // }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Text(widget.username),
-//       // child: FutureBuilder<ImgurAccountBase>(
-//       //   future: acountValue,
-//       //   builder: (context, snapshot) {
-//       //     if (snapshot.hasData) {
-//       //       print(snapshot.data);
-//       //       return Column(
-//       //         children: [
-//       //           Text(snapshot.data.id.toString()),
-//       //           Text(snapshot.data.url),
-//       //           Image.network(snapshot.data.avatar),
-//       //           Text(snapshot.data.reputation.toString()),
-//       //           Text(snapshot.data.reputation_name),
-//       //           Text(snapshot.data.created.toString()),
-//       //         ],
-//       //       );
-//       //     } else if (snapshot.hasError) {
-//       //       print('error');
-//       //       return Text("${snapshot.error}");
-//       //     }
-//       //     return CircularProgressIndicator();
-//       //   },
-//       // ),
-//     );
-//   }
-// }

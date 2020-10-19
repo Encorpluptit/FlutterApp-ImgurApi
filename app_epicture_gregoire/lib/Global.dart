@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 
 import 'ImgurAcountObject.dart';
 import 'ImgurGaleryObject.dart';
-import 'ImgurImageObject.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 
 class BasicCall {
@@ -53,7 +52,6 @@ class BasicCall {
 
   Future<ImgurAccountBase> getMyAccount() async {
     // if (_isLoggedIn == false) {
-    //   print("pas log");
     //   throw Exception("Not loggedin");
     // }
     final response = await http.get(

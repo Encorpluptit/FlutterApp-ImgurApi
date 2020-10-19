@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'Heart.dart';
 import 'Global.dart';
@@ -32,7 +30,6 @@ class _MyAppState extends State<MyApp> {
               future: user.fetchToken(trigerd),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data == true) {
-                  inspect(user);
                   return Heart(user: user);
                 }
                 return RaisedButton(
