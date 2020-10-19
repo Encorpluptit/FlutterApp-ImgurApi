@@ -26,10 +26,7 @@ class _HomeState extends State<Home> {
       future: widget.user.getGallery(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          if (page == 0) {
-            gallery.addAll(snapshot.data);
-            page += 1;
-          }
+          gallery.addAll(snapshot.data);
           return NotificationListener<ScrollNotification>(
               child: ListView(
                 children: [
