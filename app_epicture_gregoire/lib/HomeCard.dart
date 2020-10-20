@@ -58,6 +58,7 @@ class _HomeCardState extends State<HomeCard> {
                       : Color.fromARGB(255, 255, 255, 255),
                   icon: fav ? fav_fill : fav_border,
                   onPressed: () {
+                    // TODO: Trigger API CALL POST
                     setState(() {
                       fav = !fav;
                     });
@@ -70,7 +71,7 @@ class _HomeCardState extends State<HomeCard> {
                   icon: Icon(Icons.comment),
                   onPressed: () {
                     //TODO : go to comment screen and send it to imgure
-                    print("GO COMMENTÉ");
+                    print("GO COMMENTER");
                   },
                 ),
                 Text(widget.image.comment_count.toString(),

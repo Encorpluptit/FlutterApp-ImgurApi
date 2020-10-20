@@ -11,7 +11,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   BasicCall user = BasicCall();
-  bool trigerd = false;
+  bool trigered = false;
 
   @override
   void initState() {
@@ -27,17 +27,17 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.black,
         body: Center(
           child: FutureBuilder<bool>(
-              future: user.fetchToken(trigerd),
+              future: user.fetchToken(trigered),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data == true) {
                   return Heart(user: user);
                 }
                 return RaisedButton(
-                  child: Text("CONECT"),
+                  child: Text("CONNECT"),
                   textColor: Colors.white,
                   onPressed: () {
                     setState(() {
-                      trigerd = true;
+                      trigered = true;
                     });
                   },
                   color: Colors.red[600],
