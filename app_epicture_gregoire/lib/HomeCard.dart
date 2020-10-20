@@ -22,13 +22,32 @@ class _HomeCardState extends State<HomeCard> {
         color: Color.fromARGB(255, 50, 50, 50),
         child: Column(
           children: [
-            Text(
-              widget.image.account_url,
-              style: TextStyle(
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: 13,
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Container(
+                width: 30.0,
+                height: 30.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: new DecorationImage(
+                    fit: BoxFit.fill,
+                    image: new NetworkImage(
+                      "https://i.imgur.com/BoN9kdC.png",
+                      // widget.image.link,
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Container(
+                width: 30,
+              ),
+              Text(
+                widget.image.account_url,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 13,
+                ),
+              ),
+            ]),
             Image.network(widget.image.images.first.link),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
