@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
       future: widget.user.getGallery(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          inspect(snapshot.data[0]);
           gallery.addAll(snapshot.data);
           return NotificationListener<ScrollNotification>(
               child: ListView(
@@ -36,9 +37,8 @@ class _HomeState extends State<Home> {
                       for (var item in gallery)
                         if (item.images.first.mp4_size == null)
                           HomeCard(
-                            urlpicture: item.images.first.link,
-                            customHeigh: item.images.first.height,
-                          ),
+                            image: item,
+                          )
                     ],
                   )
                 ],

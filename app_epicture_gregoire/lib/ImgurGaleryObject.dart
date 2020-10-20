@@ -3,7 +3,6 @@ import 'ImgurTagObject.dart';
 
 class ImgurGallery {
   String accessToken;
-
   int account_id;
   String account_url;
   int ad_type;

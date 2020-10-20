@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'ImgurGaleryObject.dart';
 
 class HomeCard extends StatefulWidget {
-  final String urlpicture;
-  final int token;
-  final int customHeigh;
-  const HomeCard({this.urlpicture, this.token, this.customHeigh});
+  final ImgurGallery image;
+  const HomeCard({this.image});
   @override
   _HomeCardState createState() => _HomeCardState();
 }
@@ -13,6 +12,7 @@ class _HomeCardState extends State<HomeCard> {
   static const Icon fav_border = Icon(Icons.favorite_border);
   static const Icon fav_fill = Icon(Icons.favorite);
   bool fav = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +22,14 @@ class _HomeCardState extends State<HomeCard> {
         color: Color.fromARGB(255, 50, 50, 50),
         child: Column(
           children: [
-            Image.network(widget.urlpicture),
+            Text(
+              widget.image.account_url,
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 13,
+              ),
+            ),
+            Image.network(widget.image.images.first.link),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -32,12 +39,13 @@ class _HomeCardState extends State<HomeCard> {
                       : Color.fromARGB(255, 255, 255, 255),
                   icon: fav ? fav_fill : fav_border,
                   onPressed: () {
-                    print(widget.token);
                     setState(() {
                       fav = !fav;
                     });
                   },
                 ),
+                Text(widget.image.favorite_count.toString(),
+                    style: TextStyle(color: Colors.white)),
                 IconButton(
                   color: Color.fromARGB(255, 255, 255, 255),
                   icon: Icon(Icons.comment),
@@ -45,7 +53,9 @@ class _HomeCardState extends State<HomeCard> {
                     //TODO : go to comment screen and send it to imgure
                     print("GO COMMENTÉ");
                   },
-                )
+                ),
+                Text(widget.image.comment_count.toString(),
+                    style: TextStyle(color: Colors.white))
               ],
             )
           ],
