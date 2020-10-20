@@ -1,4 +1,3 @@
-
 import 'package:app_epicture_gregoire/Global.dart';
 
 import 'ImgurAcountObject.dart';
@@ -6,6 +5,7 @@ import 'BotomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'Home.dart';
 import 'Acount.dart';
+import 'AddPicture.dart';
 
 class Heart extends StatefulWidget {
   final String token;
@@ -30,6 +30,9 @@ class _Heartstate extends State<Heart> {
   Widget returnScreen(int indexValue) {
     if (indexValue == 0) {
       return Home(user: widget.user);
+    }
+    if (indexValue == 2) {
+      return AddPicture();
     }
     if (indexValue == 4) {
       return Acount(account: acount);

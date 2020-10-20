@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'ImgurAcountObject.dart';
 import 'ImgurGaleryObject.dart';
+import 'ImgurImageObject.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 
 class BasicCall {
@@ -80,6 +81,45 @@ class BasicCall {
         .map<ImgurGallery>(
             (gallery) => ImgurGallery.fromJson(gallery, _accessToken))
         .toList();
+  }
+
+  Future<ImgurImageData> uploadImage(
+      {bool video = false,
+      dynamic data,
+      String album,
+      String type = "file",
+      String name,
+      String title,
+      String description,
+      int disableAudio}) async {
+    var request = http.MultipartRequest(
+        "POST", Uri.parse("https://api.imgur.com/3/upload"));
+    if (album != null) {
+      request.fields["album"] = album;
+    }
+    if (type != null) {
+      request.fields["type"] = type;
+    }
+    if (name != null) {
+      request.fields["name"] = name;
+    }
+    if (title != null) {
+      request.fields["title"] = title;
+    }
+    if (description != null) {
+      request.fields["description"] = description;
+    }
+    if (disableAudio != null) {
+      request.fields["disable_audio"] = disableAudio as String;
+    }
+    // FIXME add link
+    request.files.add(
+        http.MultipartFile.fromBytes(video == false ? "image" : "video", data));
+    request.headers[HttpHeaders.authorizationHeader] = "Bearer $_accessToken";
+    final http.StreamedResponse response = await request.send();
+    final respBody = await response.stream.bytesToString();
+    print(respBody);
+    return ImgurImageData.fromJson(json.decode(respBody)["data"], _accessToken);
   }
 }
 
