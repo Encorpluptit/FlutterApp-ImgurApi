@@ -23,6 +23,7 @@ environment:
     
   
 dependencies:
+  image_picker: ^0.6.7+12
   ff_navigation_bar: ^0.1.5
   shared_preferences: ^0.5.12
   flutter_web_auth: ^0.2.4
