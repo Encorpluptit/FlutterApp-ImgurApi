@@ -96,7 +96,7 @@ class BasicCall {
       String description,
       int disableAudio}) async {
     var request = http.MultipartRequest(
-        "POST", Uri.parse("https://api.imgur.com/3/upload"));
+        "POST", Uri.parse("https://api.imgur.com/3/image"));
     if (album != null) {
       request.fields["album"] = album;
     }
@@ -115,7 +115,6 @@ class BasicCall {
     if (disableAudio != null) {
       request.fields["disable_audio"] = disableAudio as String;
     }
-    // FIXME add link
     request.files.add(
         http.MultipartFile.fromBytes(video == false ? "image" : "video", data));
     request.headers[HttpHeaders.authorizationHeader] = "Bearer $_accessToken";
