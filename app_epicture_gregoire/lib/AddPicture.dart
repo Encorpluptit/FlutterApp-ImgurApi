@@ -1,7 +1,7 @@
-import 'dart:html';
-
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/material.dart';
 
 class AddPicture extends StatefulWidget {
   @override
@@ -12,6 +12,7 @@ class PictureState extends State<AddPicture> {
   File _image;
 
   _imgFromCamera() async {
+    // ignore: deprecated_member_use
     File image = await ImagePicker.pickImage(
         source: ImageSource.camera, imageQuality: 50);
 
@@ -21,8 +22,10 @@ class PictureState extends State<AddPicture> {
   }
 
   _imgFromGallery() async {
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
+    var pickImage =
+        // ignore: deprecated_member_use
+        ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    File image = await pickImage;
 
     setState(() {
       _image = image;
@@ -61,8 +64,8 @@ class PictureState extends State<AddPicture> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
+    return Scaffold(
+      body: Column(
         children: <Widget>[
           SizedBox(
             height: 32,
@@ -103,4 +106,26 @@ class PictureState extends State<AddPicture> {
       ),
     );
   }
+  // File _image;
+  // Future<void> getImage() async {
+  //   // ignore: deprecated_member_use
+  //   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     _image = image;
+  //   });
+  // }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: Center(
+  //       child: _image == null ? Text('No image selected.') : Image.file(_image),
+  //     ),
+  //     floatingActionButton: FloatingActionButton(
+  //       onPressed: getImage,
+  //       tooltip: 'Pick Image',
+  //       child: Icon(Icons.add_a_photo),
+  //     ),
+  //   );
+  // }
 }
