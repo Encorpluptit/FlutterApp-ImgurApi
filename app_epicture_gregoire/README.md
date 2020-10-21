@@ -14,3 +14,18 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+Doc User
+ comment se servir d'une app
+ 
+Doc Technique
+    comme packet en react native
+    comment installer, comment le lancer, quelle est l'archi, etc ...
+    Norme de commit, norme de nomenclature
+    Exemple de comment on le fait
+    
+Choix des couleurs à inverser sur les boutons entre selection et 
+apidocs.imgur.com
+
+Commentaires, alternance de background pour les différencier
+     Boutons upvote downvote en bas

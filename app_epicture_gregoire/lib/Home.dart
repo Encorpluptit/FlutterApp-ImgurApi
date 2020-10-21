@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:app_epicture_gregoire/Acount.dart';
+import 'package:app_epicture_gregoire/Account.dart';
 import 'Global.dart';
 import 'HomeCard.dart';
 import 'package:flutter/material.dart';

@@ -4,7 +4,7 @@ import 'ImgurAcountObject.dart';
 import 'BotomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'Home.dart';
-import 'Acount.dart';
+import 'Account.dart';
 import 'AddPicture.dart';
 
 class Heart extends StatefulWidget {
@@ -17,13 +17,13 @@ class Heart extends StatefulWidget {
 
 class _Heartstate extends State<Heart> {
   int index = 0;
-  ImgurAccountBase acount;
+  ImgurAccountBase account;
 
   @override
   void initState() {
     super.initState();
     widget.user.getMyAccount().then((val) => setState(() {
-          acount = val;
+          account = val;
         }));
   }
 
@@ -35,7 +35,7 @@ class _Heartstate extends State<Heart> {
       return AddPicture();
     }
     if (indexValue == 4) {
-      return Acount(account: acount);
+      return Account(account: account);
     }
   }
 
