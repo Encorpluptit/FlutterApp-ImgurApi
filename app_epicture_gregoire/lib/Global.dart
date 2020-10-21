@@ -63,17 +63,20 @@ class BasicCall {
         json.decode(response.body)["data"], _accessToken, true);
   }
 
-  Future<List<ImgurGallery>> getGallery(
-      {String section = "hot",
-      String sort = "viral",
-      String page = "0",
-      String window = "day"}) async {
+  Future<List<ImgurGallery>> getGallery({
+    String section = "hot",
+    String sort = "viral",
+    String page = "0",
+    String window = "day",
+    String showViral = "true",
+  }) async {
     if (_isLoggedIn == false) {
       print("Not loggedin");
       throw Exception("Not loggedin");
     }
+    print(page);
     final response = await http.get(
-      "https://api.imgur.com/3/gallery/$section/$sort/$window/$page",
+      "https://api.imgur.com/3/gallery/$section/$sort/$window/$page?showViral=$showViral",
       headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
     );
     return json
