@@ -87,47 +87,79 @@ class Account extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(height: 20),
+                    AccountCardInfos(),
                     Container(
                         child: Wrap(
                             children: List.generate(
-                      snapshot.data.length,
-                      (index) {
-                        return Center(
-                          child: Image.network(
-                              snapshot.data.elementAt(index).images.first.link),
-                        );
-                      },
-                      // children: <Widget>[
-                      //   for (var item in snapshot.data)
-                      //     if (item.images.first.mp4_size == null)
-                      //       HomeCard(
-                      //         urlpicture: item.images.first.link,
-                      //         customHeigh: item.images.first.height,
-                      //       ),
-                      //   for (int i = 0; i < snapshot.data.length; i++)
-                      //     GestureDetector(
-                      //       onTap: () {
-                      //         // profile = AppData.profiles[i];
-                      //         // setState(() {});
-                      //       },
-                      //       child: Container(
-                      //         height: MediaQuery
-                      //             .of(context)
-                      //             .size
-                      //             .width / 3,
-                      //         width: MediaQuery
-                      //             .of(context)
-                      //             .size
-                      //             .width / 3,
-                      //         decoration: BoxDecoration(
-                      //             image: DecorationImage(
-                      //                 image: AssetImage(
-                      //                     AppData.profiles[i].imageUrl),
-                      //                 fit: BoxFit.cover)),
-                      //       ),
-                      //     )
-                      // ],
-                    )))
+                              snapshot.data.length,
+                                  (index) {
+                                return AccountCardImage(src: snapshot.data
+                                            .elementAt(index)
+                                            .images
+                                            .first
+                                            .link,
+                                            );
+
+                                // return ClipRRect(
+                                //   borderRadius: BorderRadius.circular(8.0),
+                                //   child: Image.network(
+                                //     snapshot.data
+                                //         .elementAt(index)
+                                //         .images
+                                //         .first
+                                //         .link,
+                                //     height: MediaQuery
+                                //         .of(context)
+                                //         .size
+                                //         .width / 3,
+                                //     width: MediaQuery
+                                //         .of(context)
+                                //         .size
+                                //         .width / 3,
+                                //   ),
+                                // );
+
+                                return Center(
+                                  child: Image.network(
+                                      snapshot.data
+                                          .elementAt(index)
+                                          .images
+                                          .first
+                                          .link),
+                                );
+                              },
+                              // children: <Widget>[
+                              //   for (var item in snapshot.data)
+                              //     if (item.images.first.mp4_size == null)
+                              //       HomeCard(
+                              //         urlpicture: item.images.first.link,
+                              //         customHeigh: item.images.first.height,
+                              //       ),
+                              //   for (int i = 0; i < snapshot.data.length; i++)
+                              //     GestureDetector(
+                              //       onTap: () {
+                              //         // profile = AppData.profiles[i];
+                              //         // setState(() {});
+                              //       },
+                              //       child: Container(
+                              //         height: MediaQuery
+                              //             .of(context)
+                              //             .size
+                              //             .width / 3,
+                              //         width: MediaQuery
+                              //             .of(context)
+                              //             .size
+                              //             .width / 3,
+                              //         decoration: BoxDecoration(
+                              //             image: DecorationImage(
+                              //                 image: AssetImage(
+                              //                     AppData.profiles[i].imageUrl),
+                              //                 fit: BoxFit.cover)),
+                              //       ),
+                              //     )
+                              // ],
+                            )))
                   ],
                 ),
               );
@@ -187,4 +219,96 @@ class Account extends StatelessWidget {
 //       });
 //   print('fair enoth');
 // }
+}
+
+class AccountCardInfos extends StatelessWidget {
+  final String cardText = "";
+  final int value = 0;
+
+  // MyAccountCard(
+  //     this.cardText,
+  //     this.value,
+  //     );
+  // MyAccountCard(
+  //     cardText,
+  //     value,
+  //     ){}
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: Colors.grey,
+        elevation: 10,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.album, size: 70),
+              title: Text(
+                  cardText, style: TextStyle(color: Colors.white)),
+              subtitle: Text(value.toString(), style: TextStyle(color: Colors.white)),
+            ),
+            SizedBox(height: 20),
+
+            // ButtonTheme.bar(
+            //   child: ButtonBar(
+            //     children: <Widget>[
+            //       FlatButton(
+            //         child: const Text(
+            //             'Edit', style: TextStyle(color: Colors.white)),
+            //         onPressed: () {},
+            //       ),
+            //       FlatButton(
+            //         child: const Text(
+            //             'Delete', style: TextStyle(color: Colors.white)),
+            //         onPressed: () {},
+            //       ),
+            //     ],
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class AccountCardImage extends StatelessWidget {
+  final String src;
+
+  const AccountCardImage({Key key, this.src}) : super(key: key);
+
+  // const AccountCardImage({Key key, String url}) : super(key: key) {
+  //   this.src = url;
+  // };
+  // MyAccountCard(
+  //     this.cardText,
+  //     this.value,
+  //     );
+  // MyAccountCardImage(
+  //     {String url}
+  //     ){
+  //   this.src = url;
+  // }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.width / 3,
+      width: MediaQuery.of(context).size.width / 3,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: Colors.grey,
+        elevation: 10,
+        // child: Image.network(src)
+        child: Container(
+              child: Image.network(src)
+        )
+      ),
+    );
+  }
 }
