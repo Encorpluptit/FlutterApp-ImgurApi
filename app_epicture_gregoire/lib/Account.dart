@@ -88,7 +88,8 @@ class Account extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 20),
-                    AccountCardInfos(),
+                    // AccountCardLike(title: "coucou"),
+                    AccountCardLike(subtitle: 5),
                     Container(
                         child: Wrap(
                             children: List.generate(
@@ -186,57 +187,34 @@ class Account extends StatelessWidget {
           }),
     );
   }
+}
 
-// Widget hello() {
-//   print("hello function");
-//   FutureBuilder<List<ImgurGallery>>(
-//       future: account.getPersonalImages(),
-//       builder: (context, snapshot) {
-//         if (snapshot.hasData) {
-//           print('tezezmklre');
-//           print(snapshot.data);
-//           return ListView(
-//             children: [
-//               Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: <Widget>[
-//                   for (var item in snapshot.data)
-//                     if (item.images.first.mp4_size == null)
-//                       HomeCard(
-//                         urlpicture: item.images.first.link,
-//                         customHeigh: item.images.first.height,
-//                       ),
-//                 ],
-//               )
-//             ],
-//           );
-//         } else if (snapshot.hasError) {
-//           print('error');
-//           return Text("${snapshot.error}");
-//         }
-//         print("lol");
-//         return CircularProgressIndicator();
-//       });
-//   print('fair enoth');
-// }
+class AccountCardLike extends AccountCardInfos {
+  static const String staticTitle = "Likes";
+  // const AccountCardLike({Key key}) : super(key: key);
+  const AccountCardLike({Key key, int subtitle}) : super(key: key, value: subtitle);
+  @override
+  Widget build(BuildContext context) {
+    return AccountCardInfos(
+        title: staticTitle,
+        value: this.value,
+        icon: Icon(Icons.thumb_up, size: 25)
+    );
+  }
 }
 
 class AccountCardInfos extends StatelessWidget {
-  final String cardText = "";
-  final int value = 0;
+  final String title;
+  final int value;
+  final Widget icon;
 
-  // MyAccountCard(
-  //     this.cardText,
-  //     this.value,
-  //     );
-  // MyAccountCard(
-  //     cardText,
-  //     value,
-  //     ){}
+  // const AccountCardInfos({Key key, this.cardText, this.value, this.icon}) : super(key: key);
+  const AccountCardInfos({Key key, this.title, this.value, this.icon}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: MediaQuery.of(context).size.width / 3,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -247,52 +225,27 @@ class AccountCardInfos extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.album, size: 70),
+              leading: icon,
               title: Text(
-                  cardText, style: TextStyle(color: Colors.white)),
-              subtitle: Text(value.toString(), style: TextStyle(color: Colors.white)),
+                  title,
+                  style: TextStyle(color: Colors.white),
+                  maxLines: 1,
+              ),
+              subtitle: Text(value != 0 ? value.toString() : "Error",
+                  style: TextStyle(color: Colors.white)),
             ),
-            SizedBox(height: 20),
-
-            // ButtonTheme.bar(
-            //   child: ButtonBar(
-            //     children: <Widget>[
-            //       FlatButton(
-            //         child: const Text(
-            //             'Edit', style: TextStyle(color: Colors.white)),
-            //         onPressed: () {},
-            //       ),
-            //       FlatButton(
-            //         child: const Text(
-            //             'Delete', style: TextStyle(color: Colors.white)),
-            //         onPressed: () {},
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
     );
   }
 }
+
 class AccountCardImage extends StatelessWidget {
   final String src;
 
   const AccountCardImage({Key key, this.src}) : super(key: key);
 
-  // const AccountCardImage({Key key, String url}) : super(key: key) {
-  //   this.src = url;
-  // };
-  // MyAccountCard(
-  //     this.cardText,
-  //     this.value,
-  //     );
-  // MyAccountCardImage(
-  //     {String url}
-  //     ){
-  //   this.src = url;
-  // }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -302,12 +255,12 @@ class AccountCardImage extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: Colors.grey,
+        color: Colors.grey[315],
         elevation: 10,
         // child: Image.network(src)
         child: Container(
               child: Image.network(src)
-        )
+        ),
       ),
     );
   }
