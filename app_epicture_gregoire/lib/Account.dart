@@ -46,6 +46,7 @@ class Account extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                           ),
+
                           // child: Text(
                           //   account.url,
                           //   textAlign: TextAlign.center,

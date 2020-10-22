@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'Home.dart';
 import 'Account.dart';
 import 'AddPicture.dart';
+import 'Favorites.dart';
 
 class Heart extends StatefulWidget {
   final String token;
@@ -33,6 +34,9 @@ class _Heartstate extends State<Heart> {
     }
     if (indexValue == 2) {
       return AddPicture();
+    }
+    if (indexValue == 3) {
+      return Favorites(account: account);
     }
     if (indexValue == 4) {
       return Account(account: account);
