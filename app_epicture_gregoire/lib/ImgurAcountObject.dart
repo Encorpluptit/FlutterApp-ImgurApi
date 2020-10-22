@@ -12,11 +12,11 @@ class ImgurAccountBase {
   final String bio;
   final int created;
   final int id;
-  final bool pro_expiration;
+  final bool proExpiration;
   final int reputation;
-  final String reputation_name;
+  final String reputationName;
   final String url;
-  final bool user_follow;
+  final bool userFollow;
 
   ImgurAccountBase(
       {this.accessToken,
@@ -25,11 +25,11 @@ class ImgurAccountBase {
       this.bio,
       this.created,
       this.id,
-      this.pro_expiration,
+      this.proExpiration,
       this.reputation,
-      this.reputation_name,
+      this.reputationName,
       this.url,
-      this.user_follow,
+      this.userFollow,
       this.cover});
 
   factory ImgurAccountBase.fromJson(
@@ -41,11 +41,11 @@ class ImgurAccountBase {
         bio: json['bio'] != null ? json['bio'] : null,
         created: json['created'],
         id: json['id'],
-        pro_expiration: json['pro_expiration'],
+        proExpiration: json['pro_expiration'],
         reputation: json['reputation'],
-        reputation_name: json['reputation_name'],
+        reputationName: json['reputation_name'],
         url: json['url'],
-        user_follow: json['user_follow']['status'],
+        userFollow: json['user_follow']['status'],
         cover: json['cover']);
   }
 
