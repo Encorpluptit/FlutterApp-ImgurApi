@@ -29,13 +29,20 @@ class Favorites extends StatelessWidget {
                               .images
                               .first
                               .link);
-                          return AccountCardImage(
-                            src: snapshot.data
+                          return Image.network(
+                                snapshot.data
                                 .elementAt(index)
                                 .images
                                 .first
                                 .link,
                           );
+                          // return AccountCardImage(
+                          //   src: snapshot.data
+                          //       .elementAt(index)
+                          //       .images
+                          //       .first
+                          //       .link,
+                          // );
                         },
                       )));
 
