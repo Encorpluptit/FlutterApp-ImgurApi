@@ -63,17 +63,20 @@ class BasicCall {
         json.decode(response.body)["data"], _accessToken, true);
   }
 
-  Future<List<ImgurGallery>> getGallery(
-      {String section = "hot",
-      String sort = "viral",
-      String page = "0",
-      String window = "day"}) async {
+  Future<List<ImgurGallery>> getGallery({
+    String section = "hot",
+    String sort = "viral",
+    String page = "0",
+    String window = "day",
+    String showViral = "true",
+  }) async {
     if (_isLoggedIn == false) {
       print("Not loggedin");
       throw Exception("Not loggedin");
     }
+    print(page);
     final response = await http.get(
-      "https://api.imgur.com/3/gallery/$section/$sort/$window/$page",
+      "https://api.imgur.com/3/gallery/$section/$sort/$window/$page?showViral=$showViral",
       headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
     );
     return json
@@ -93,7 +96,7 @@ class BasicCall {
       String description,
       int disableAudio}) async {
     var request = http.MultipartRequest(
-        "POST", Uri.parse("https://api.imgur.com/3/upload"));
+        "POST", Uri.parse("https://api.imgur.com/3/image"));
     if (album != null) {
       request.fields["album"] = album;
     }
@@ -112,7 +115,6 @@ class BasicCall {
     if (disableAudio != null) {
       request.fields["disable_audio"] = disableAudio as String;
     }
-    // FIXME add link
     request.files.add(
         http.MultipartFile.fromBytes(video == false ? "image" : "video", data));
     request.headers[HttpHeaders.authorizationHeader] = "Bearer $_accessToken";
