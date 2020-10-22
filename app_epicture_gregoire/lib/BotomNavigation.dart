@@ -42,7 +42,7 @@ class MyNavigation extends StatelessWidget {
         ),
         FFNavigationBarItem(
           iconData: Icons.account_circle,
-          label: 'Acount',
+          label: 'Account',
         ),
       ],
     );

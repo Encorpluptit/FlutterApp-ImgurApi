@@ -60,4 +60,15 @@ class ImgurAccountBase {
         .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
         .toList();
   }
+  Future<List<ImgurGallery>> getFavoriteImages() async {
+    final response = await http.get(
+      "https://api.imgur.com/3/account/$url/favorites",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
+    );
+    print("json value");
+    return json
+        .decode(response.body)['data']
+        .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
+        .toList();
+  }
 }

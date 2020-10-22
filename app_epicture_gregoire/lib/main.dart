@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
                   return Heart(user: user);
                 }
                 return RaisedButton(
-                  child: Text("CONNECT"),
+                  child: Text("Connect With Imgur"),
                   textColor: Colors.white,
                   onPressed: () {
                     setState(() {

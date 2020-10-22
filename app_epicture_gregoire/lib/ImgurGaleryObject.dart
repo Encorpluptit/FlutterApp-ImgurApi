@@ -108,7 +108,7 @@ class ImgurGallery {
       layout: json['layout'],
       link: json['link'],
       nsfw: json['nsfw'],
-      points: json['points'],
+      points: json['points'] != null ? json['points'] : 0,
       privacy: json['privacy'],
       score: json['score'],
       section: json['section'],
@@ -120,7 +120,7 @@ class ImgurGallery {
       title: json['title'],
       topic: json['topic'],
       // topic_id: json['topic_id'],
-      ups: json['ups'],
+      ups: json['ups'] != null ? json['ups'] : 0,
       views: json['views'],
       vote: json['vote'],
     );

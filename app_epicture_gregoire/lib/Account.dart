@@ -21,34 +21,47 @@ class Account extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         Container(
-                          height: 110,
-                          width: 100,
+                          height: MediaQuery.of(context).size.width / 4,
+                          // height: 110,
+                          // width: 100,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
                           ),
+                          child: Icon(Icons.album),
                         ),
-                        SizedBox(height: 20),
+                        // SizedBox(height: 20),
                         Container(
                           alignment: Alignment.center,
-                          child: Text(
-                            account.url,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 20),
+                          child: ListTile(
+                            // leading: Icon(Icons.album, size: 50),
+                            title:  Text(
+                              account.url,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 40),
+                            ),
+                            subtitle: Text(
+                              account.bio != null ? account.bio : "No Description",
+                              // 'TWICE',
+                              textAlign: TextAlign.center,
+                            ),
                           ),
+                          // child: Text(
+                          //   account.url,
+                          //   textAlign: TextAlign.center,
+                          //   style: TextStyle(
+                          //       fontWeight: FontWeight.w600, fontSize: 20),
+                          // ),
+
+                          // child: Text(
+                          //   account.url,
+                          //   textAlign: TextAlign.center,
+                          //   style: TextStyle(
+                          //       fontWeight: FontWeight.w600, fontSize: 20),
+                          // ),
+
                         ),
                         SizedBox(height: 20),
-
-                        // Container(
-                        //   // margin: EdgeInsets.symmetric(horizontal: 20),
-                        //   alignment: Alignment.center,
-                        //   child: Text(
-                        //     // profile.subtitle,
-                        //     'LOL',
-                        //     textAlign: TextAlign.center,
-                        //   ),
-                        // ),
-                        // SizedBox(height: 20),
 
                         Container(
                           // margin: EdgeInsets.symmetric(horizontal: 16),
@@ -57,14 +70,15 @@ class Account extends StatelessWidget {
                             children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  AccountCardLike(subtitle: 5),
-                                  // Text(
-                                  //   // profile.totalPost,
-                                  //   '1337',
-                                  //   style:
-                                  //       TextStyle(fontWeight: FontWeight.w600),
-                                  // ),
-                                  // Text('Post')
+                                  // AccountCardLike(subtitle: 5, list: snapshot.data),
+                                  AccountCardLike(
+                                    () {
+                                      int count = 0;
+                                      for (var item in snapshot.data)
+                                        count += item.points;
+                                      return count;
+                                    },
+                                  ),
                                 ],
                               ),
                               Column(
@@ -74,7 +88,15 @@ class Account extends StatelessWidget {
                               ),
                               Column(
                                 children: <Widget>[
-                                  AccountCardLike(subtitle: 5),
+                                  AccountCardFav(
+                                        () {
+                                      int count = 0;
+                                      // for (var item in snapshot.data)
+                                      //   count += item.favorite_count;
+                                      return count;
+                                    },
+                                  ),
+                                  // AccountCardLike(subtitle: 5),
                                 ],
                               )
                             ],
@@ -113,21 +135,36 @@ class Account extends StatelessWidget {
 
 class AccountCardLike extends AccountCardInfos {
   static const String staticTitle = "Likes";
+  final int Function() count;
 
-  const AccountCardLike({Key key, int subtitle})
-      : super(key: key, value: subtitle);
+  AccountCardLike(this.count, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AccountCardInfos(
         title: staticTitle,
-        value: this.value,
-        icon: Icon(Icons.thumb_up_alt_outlined, size: 20));
+        value: this.count(),
+        icon: Icon(Icons.thumb_up_outlined, size: 20));
+  }
+}
+
+class AccountCardFav extends AccountCardInfos {
+  static const String staticTitle = "Favorite";
+  final int Function() count;
+
+  AccountCardFav(this.count, {Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AccountCardInfos(
+        title: staticTitle,
+        value: this.count(),
+        icon: Icon(Icons.favorite_border_outlined, size: 20));
   }
 }
 
 class AccountCardFollow extends AccountCardInfos {
-  static const String staticTitle = "Likes";
+  static const String staticTitle = "Follows";
 
   const AccountCardFollow({Key key, int subtitle})
       : super(key: key, value: subtitle);
@@ -137,7 +174,7 @@ class AccountCardFollow extends AccountCardInfos {
     return AccountCardInfos(
         title: staticTitle,
         value: this.value,
-        icon: Icon(Icons.favorite_border_outlined, size: 20));
+        icon: Icon(Icons.supervised_user_circle_rounded, size: 20));
   }
 }
 
@@ -146,7 +183,6 @@ class AccountCardInfos extends StatelessWidget {
   final int value;
   final Widget icon;
 
-  // const AccountCardInfos({Key key, this.cardText, this.value, this.icon}) : super(key: key);
   const AccountCardInfos({Key key, this.title, this.value, this.icon})
       : super(key: key);
 
@@ -163,19 +199,19 @@ class AccountCardInfos extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-              SizedBox(height: 20),
-              icon,
-              ListTile(
-                title: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white),
-                  maxLines: 1,
-                ),
-                subtitle: Text(value != 0 ? value.toString() : "Error",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white)),
+            SizedBox(height: 20),
+            icon,
+            ListTile(
+              title: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                maxLines: 1,
               ),
+              subtitle: Text(value.toString(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white)),
+            ),
           ],
         ),
       ),
@@ -185,6 +221,7 @@ class AccountCardInfos extends StatelessWidget {
 
 class AccountCardImage extends StatelessWidget {
   final String src;
+  // final Color cardColor;
 
   const AccountCardImage({Key key, this.src}) : super(key: key);
 
@@ -198,7 +235,6 @@ class AccountCardImage extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        // color: Colors.grey[315],
         color: Colors.grey,
         elevation: 10,
         // child: Image.network(src)
