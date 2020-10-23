@@ -86,19 +86,6 @@ class BasicCall {
         .toList();
   }
 
-  static void favImage(String hash, String accessToken) async {
-    print("https://api.imgur.com/3/image/$hash/favorite");
-    final response = await http.post(
-      "https://api.imgur.com/3/image/$hash/favorite",
-      headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
-    );
-    print("json value");
-    // return json
-    //     .decode(response.body)['data']
-    //     .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
-    //     .toList();
-  }
-
   Future<ImgurImageData> uploadImage(
       {bool video = false,
       dynamic data,

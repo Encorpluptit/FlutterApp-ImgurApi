@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'ImgurTagObject.dart';
+import 'package:http/http.dart' as http;
 
 class ImgurImageData {
   String accessToken;
@@ -106,6 +108,14 @@ class ImgurImageData {
       width: json['width'],
       name: json['name'] != null ? json['name'] : null,
       looping: json['looping'] != null ? json['looping'] : false,
+    );
+  }
+
+  void favImage(String hash) async {
+    print("https://api.imgur.com/3/image/$hash/favorite");
+    final request = await http.post(
+      "https://api.imgur.com/3/image/$hash/favorite",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
   }
 }

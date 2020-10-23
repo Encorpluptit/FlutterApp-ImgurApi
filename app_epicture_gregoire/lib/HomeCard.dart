@@ -60,7 +60,8 @@ class _HomeCardState extends State<HomeCard> {
                       : Color.fromARGB(255, 255, 255, 255),
                   icon: fav ? fav_fill : fav_border,
                   onPressed: () {
-                    // TODO: Trigger API CALL POST
+                    widget.image.images.first.favImage(widget.image.images.first.id.toString());
+                    widget.image.favorite_count += fav == true ? -1 : 1 ;
                     setState(() {
                       fav = !fav;
                     });
