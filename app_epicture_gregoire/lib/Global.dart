@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-import 'ImgurAcountObject.dart';
+import 'ImgurAccountObject.dart';
 import 'ImgurGaleryObject.dart';
 import 'ImgurImageObject.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
@@ -85,6 +85,21 @@ class BasicCall {
             (gallery) => ImgurGallery.fromJson(gallery, _accessToken))
         .toList();
   }
+
+
+  static void favImage(String hash, String accessToken) async {
+    print("https://api.imgur.com/3/image/$hash/favorite");
+    final response = await http.post(
+      "https://api.imgur.com/3/image/$hash/favorite",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
+    );
+    print("json value");
+    // return json
+    //     .decode(response.body)['data']
+    //     .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
+    //     .toList();
+  }
+
 
   Future<ImgurImageData> uploadImage(
       {bool video = false,

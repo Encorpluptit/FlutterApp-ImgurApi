@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ImgurAcountObject.dart';
+import 'ImgurAccountObject.dart';
 import 'ImgurGaleryObject.dart';
 
 class Account extends StatelessWidget {
@@ -109,6 +109,11 @@ class Account extends StatelessWidget {
                                 children: List.generate(
                           snapshot.data.length,
                           (index) {
+                            print(snapshot.data
+                                .elementAt(index)
+                                .images
+                                .first
+                                .link);
                             return AccountCardImage(
                               src: snapshot.data
                                   .elementAt(index)

@@ -1,6 +1,6 @@
 import 'package:app_epicture_gregoire/Global.dart';
 
-import 'ImgurAcountObject.dart';
+import 'ImgurAccountObject.dart';
 import 'BotomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'Home.dart';

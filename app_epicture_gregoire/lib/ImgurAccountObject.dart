@@ -60,14 +60,22 @@ class ImgurAccountBase {
         .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
         .toList();
   }
+
   Future<List<ImgurGallery>> getFavoriteImages() async {
+  // Future<List<ImgurImageData>> getFavoriteImages() async {
     final response = await http.get(
       "https://api.imgur.com/3/account/$url/favorites",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
     return json
-        .decode(response.body)['data']
-        .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
+        .decode(response.body)["data"]
+        .map<ImgurGallery>(
+            (gallery) => ImgurGallery.fromJson(gallery, accessToken))
         .toList();
+    // return json
+    //     .decode(response.body)['data']
+    //     .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
+    //     // .map<ImgurImageData>((image) => ImgurImageData.fromJson(image, accessToken))
+    //     .toList();
   }
 }

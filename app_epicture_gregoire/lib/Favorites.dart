@@ -1,7 +1,9 @@
+import 'package:app_epicture_gregoire/ImgurImageObject.dart';
 import 'package:flutter/material.dart';
 
+import 'HomeCard.dart';
+import 'ImgurAccountObject.dart';
 import 'Account.dart';
-import 'ImgurAcountObject.dart';
 import 'ImgurGaleryObject.dart';
 
 class Favorites extends StatelessWidget {
@@ -14,59 +16,33 @@ class Favorites extends StatelessWidget {
     return Center(
       child: FutureBuilder<List<ImgurGallery>>(
           future: account.getFavoriteImages(),
+          // future: account.getPersonalImages(),
           builder: (context, snapshot) {
+            // print(snapshot.data); // TODO: Why ?
             if (snapshot.hasData) {
               print("LOOOOl");
               // inspect(snapshot.data); // TODO: Why ?
-              return Container(
-                  child: Wrap(
-                      children: List.generate(
-                        snapshot.data.length,
-                            (index) {
-                          print("image OK");
-                          print(snapshot.data
-                              .elementAt(index)
-                              .images
-                              .first
-                              .link);
-                          return Image.network(
-                                snapshot.data
-                                .elementAt(index)
-                                .images
-                                .first
-                                .link,
-                          );
-                          // return AccountCardImage(
-                          //   src: snapshot.data
-                          //       .elementAt(index)
-                          //       .images
-                          //       .first
-                          //       .link,
-                          // );
-                        },
-                      )));
+              for (var item in snapshot.data)
+                print(item.images.first.link);
+              return ListView(
+                children: [
 
-              // return GridView.count(
-              //   // Create a grid with 2 columns. If you change the scrollDirection to
-              //   // horizontal, this produces 2 rows.
-              //   crossAxisCount: 2,
-              //   // Generate 100 widgets that display their index in the List.
-              //   children: List.generate(snapshot.data.length, (index) {
-              //     print("LOOOOl2");
-              //     return Center(
-              //       child: Image.network(
-              //           snapshot.data
-              //               .elementAt(index)
-              //               .images
-              //               .first
-              //               .link),
-              //     );
-              //   }),
-              // );
-
+                Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  for (var item in snapshot.data)
+                    if (item.images.first.mp4_size == null)
+                      HomeCard(
+                        image: item
+                      ),
+                  ]
+                )
+                ],
+              );
             } else if (snapshot.hasError) {
               print('error');
-              return Text("${snapshot.error}");
+              // return Text("${snapshot.error}");
+              return Text("ERROR");
             }
             return CircularProgressIndicator();
           }),
