@@ -7,6 +7,7 @@ import 'Home.dart';
 import 'Account.dart';
 import 'Favorites.dart';
 import 'AddPost.dart';
+import 'Search.dart';
 
 class Heart extends StatefulWidget {
   final String token;
@@ -19,23 +20,6 @@ class Heart extends StatefulWidget {
 class _Heartstate extends State<Heart> {
   int _selectedIndex = 0;
   ImgurAccountBase account;
-
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -54,6 +38,9 @@ class _Heartstate extends State<Heart> {
   Widget returnScreen(int indexValue) {
     if (indexValue == 0) {
       return Home(user: widget.user);
+    }
+    if (indexValue == 1) {
+      return Search(user: widget.user);
     }
     if (indexValue == 2) {
       return AddPost(user: widget.user);
@@ -90,19 +77,19 @@ class _Heartstate extends State<Heart> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Business',
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_box),
-            label: 'School',
+            label: 'Add',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: 'School',
+            label: 'Likes',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'School',
+            label: 'Account',
           ),
         ],
         currentIndex: _selectedIndex,

@@ -86,7 +86,6 @@ class BasicCall {
         .toList();
   }
 
-
   static void favImage(String hash, String accessToken) async {
     print("https://api.imgur.com/3/image/$hash/favorite");
     final response = await http.post(
@@ -99,7 +98,6 @@ class BasicCall {
     //     .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))
     //     .toList();
   }
-
 
   Future<ImgurImageData> uploadImage(
       {bool video = false,
@@ -137,6 +135,32 @@ class BasicCall {
     final respBody = await response.stream.bytesToString();
     print(respBody);
     return ImgurImageData.fromJson(json.decode(respBody)["data"], _accessToken);
+  }
+
+  Future<List<ImgurGallery>> searchGallery(
+      {String sort = "time",
+      String window = "all",
+      String page = "0",
+      String query,
+      String searchType}) async {
+    if (_isLoggedIn == false) {
+      print("Not loggedin");
+      throw Exception("Not loggedin");
+    }
+
+    final uri = Uri.encodeFull(
+        "https://api.imgur.com/3/gallery/search/$sort/$window/$page?q=${(searchType == null) ? '' : "$searchType:"}$query");
+    print(uri);
+    final response = await http.get(
+      uri,
+      headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
+    );
+    print(response.body);
+    return json
+        .decode(response.body)["data"]
+        .map<ImgurGallery>(
+            (gallery) => ImgurGallery.fromJson(gallery, _accessToken))
+        .toList();
   }
 }
 
