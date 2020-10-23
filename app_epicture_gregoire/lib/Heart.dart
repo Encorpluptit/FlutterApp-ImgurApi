@@ -17,8 +17,31 @@ class Heart extends StatefulWidget {
 }
 
 class _Heartstate extends State<Heart> {
-  int index = 0;
+  int _selectedIndex = 0;
   ImgurAccountBase account;
+
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -45,6 +68,7 @@ class _Heartstate extends State<Heart> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: const Text(
           'Epicture',
@@ -55,16 +79,46 @@ class _Heartstate extends State<Heart> {
         toolbarHeight: 40.00,
         backgroundColor: Color.fromARGB(255, 231, 222, 200),
       ),
-      body: Center(child: returnScreen(index)),
+      body: Center(child: returnScreen(_selectedIndex)),
       // body: Center(child: _widgetOptions.elementAt(index)),
-      bottomNavigationBar: MyNavigation(
-        index,
-        (int val) {
-          setState(() {
-            index = val;
-          });
-        },
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Business',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box),
+            label: 'School',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'School',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'School',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Color.fromARGB(255, 48, 71, 94),
+        backgroundColor: Color.fromARGB(255, 231, 222, 200),
+        onTap: _onItemTapped,
       ),
+      // bottomNavigationBar: MyNavigation(
+      //   index,
+      //   (int val) {
+      //     setState(() {
+      //       index = val;
+      //     });
+      //   },
+      // ),
     );
   }
 }
