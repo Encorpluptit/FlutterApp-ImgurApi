@@ -16,12 +16,9 @@ class Favorites extends StatelessWidget {
     return Center(
       child: FutureBuilder<List<ImgurGallery>>(
           future: account.getFavoriteImages(),
-          // future: account.getPersonalImages(),
           builder: (context, snapshot) {
-            // print(snapshot.data); // TODO: Why ?
             if (snapshot.hasData) {
               print("LOOOOl");
-              // inspect(snapshot.data); // TODO: Why ?
               for (var item in snapshot.data)
                 print(item.images.first.link);
               return ListView(
@@ -40,8 +37,6 @@ class Favorites extends StatelessWidget {
                 ],
               );
             } else if (snapshot.hasError) {
-              print('error');
-              // return Text("${snapshot.error}");
               return Text("ERROR");
             }
             return CircularProgressIndicator();

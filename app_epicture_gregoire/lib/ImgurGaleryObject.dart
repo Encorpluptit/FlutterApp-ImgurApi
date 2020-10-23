@@ -1,5 +1,7 @@
 import 'ImgurImageObject.dart';
 import 'ImgurTagObject.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class ImgurGallery {
   String accessToken;
