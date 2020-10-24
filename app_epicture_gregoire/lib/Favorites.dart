@@ -19,6 +19,8 @@ class Favorites extends StatelessWidget {
           future: account.getFavoriteImages(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              print("hello");
+              inspect(snapshot.data);
               return ListView(
                 children: [
                   Column(
@@ -26,7 +28,7 @@ class Favorites extends StatelessWidget {
                     children: <Widget>[
                       for (var item in snapshot.data)
                         if (item.images.first.mp4_size == null)
-                          HomeCard(image: item),
+                          if (item.in_gallery == false) HomeCard(image: item),
                     ],
                   )
                 ],

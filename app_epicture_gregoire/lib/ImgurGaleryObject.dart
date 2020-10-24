@@ -129,4 +129,11 @@ class ImgurGallery {
       vote: json['vote'],
     );
   }
+  void favGalery() async {
+    final request = await http.post(
+      "https://api.imgur.com/3/album/$id/favorite",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
+    );
+    print(request.body);
+  }
 }

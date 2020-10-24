@@ -18,7 +18,7 @@ class _HomeCardState extends State<HomeCard> {
   @override
   void initState() {
     super.initState();
-    fav = widget.image.images.first.favorite;
+    fav = widget.image.favorite;
     // if (fav) {
     //   print("CARD");
     //   print(fav);
@@ -87,20 +87,17 @@ class _HomeCardState extends State<HomeCard> {
             children: [
               IconButton(
                 iconSize: 45,
-                color: widget.image.images.first.favorite == true
+                color: fav == true
                     ? Color.fromARGB(255, 255, 0, 0)
                     : Color.fromARGB(255, 255, 255, 255),
-                icon: widget.image.images.first.favorite == true
-                    ? fav_fill
-                    : fav_border,
+                icon: fav == true ? fav_fill : fav_border,
                 onPressed: () {
-                  widget.image.images.first
-                      .favImage(widget.image.images.first.id.toString());
+                  widget.image.favGalery();
+                  widget.image.images.first.favImage();
                   widget.image.favorite_count +=
                       widget.image.favorite == true ? -1 : 1;
                   setState(() {
-                    widget.image.images.first.favorite =
-                        !widget.image.images.first.favorite;
+                    fav = !fav;
                   });
                 },
               ),

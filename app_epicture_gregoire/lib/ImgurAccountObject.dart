@@ -72,6 +72,7 @@ class ImgurAccountBase {
         .map<ImgurGallery>(
             (gallery) => ImgurGallery.fromJson(gallery, accessToken))
         .toList();
+
     // return json
     //     .decode(response.body)['data']
     //     .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))

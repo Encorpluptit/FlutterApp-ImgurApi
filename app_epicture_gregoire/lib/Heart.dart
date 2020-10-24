@@ -35,6 +35,7 @@ class _Heartstate extends State<Heart> {
         }));
   }
 
+  // ignore: missing_return
   Widget returnScreen(int indexValue) {
     if (indexValue == 0) {
       return Home(user: widget.user);

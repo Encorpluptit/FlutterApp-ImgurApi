@@ -76,7 +76,7 @@ class BasicCall {
     }
     final response = await http.get(
       "https://api.imgur.com/3/gallery/$section/$sort/$window/$page?showViral=$showViral",
-      headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
+      headers: {HttpHeaders.authorizationHeader: "Bearer $_accessToken"},
     );
     return json
         .decode(response.body)["data"]
