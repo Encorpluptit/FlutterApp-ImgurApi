@@ -1,11 +1,17 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'ImgurAccountObject.dart';
 import 'ImgurGaleryObject.dart';
+import 'package:http/http.dart' as http;
 
 class HomeCard extends StatefulWidget {
+  String id;
   ImgurGallery image;
-  HomeCard({this.image});
+  HomeCard({this.image, this.id});
   @override
   _HomeCardState createState() => _HomeCardState();
 }
@@ -14,17 +20,32 @@ class _HomeCardState extends State<HomeCard> {
   static const Icon fav_border = Icon(Icons.favorite_border);
   static const Icon fav_fill = Icon(Icons.favorite);
   bool fav = false;
+  String avatar = "https://i.imgur.com/BoN9kdC.png";
 
   @override
   void initState() {
     super.initState();
     fav = widget.image.favorite;
+    // fetchavatar(widget.image.account_url).then((value) => () {
+    //       setState(() {
+    //         avatar = value.avatar;
+    //       });
+    //     });
     // if (fav) {
     //   print("CARD");
     //   print(fav);
     //   inspect(widget.image);
     // }
   }
+
+  // Future<ImgurAccountBase> fetchavatar(String username) async {
+  //   final response = await http.get(
+  //     "https://api.imgur.com/3/account/$username",
+  //     headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurAPIClientID"},
+  //   );
+  //   return ImgurAccountBase.fromJson(
+  //       json.decode(response.body)["data"], "", false);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +59,6 @@ class _HomeCardState extends State<HomeCard> {
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             Container(width: 10),
             Container(
-              width: 50.0,
-              height: 50.0,
-              decoration: new BoxDecoration(
-                shape: BoxShape.circle,
-                image: new DecorationImage(
-                  fit: BoxFit.fill,
-                  image: new NetworkImage(
-                    "https://i.imgur.com/BoN9kdC.png",
-                    // widget.image.link,
-                  ),
-                ),
-              ),
-            ),
-            Container(
               width: 30,
             ),
             Text(
@@ -64,24 +71,6 @@ class _HomeCardState extends State<HomeCard> {
           ]),
           Container(height: 5),
           Image.network(widget.image.images.first.link),
-          // Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          //   IconButton(
-          //     color: fav
-          //         ? Color.fromARGB(255, 255, 0, 0)
-          //         : Color.fromARGB(255, 255, 255, 255),
-          //     icon: fav ? fav_fill : fav_border,
-          //     onPressed: () {
-          //       widget.image.images.first
-          //           .favImage(widget.image.images.first.id);
-          //       widget.image.favorite_count += fav == true ? -1 : 1;
-          //       setState(() {
-          //         fav = !fav;
-          //       });
-          //     },
-          //     iconSize: 45,
-          //   ),
-          // ]),
-          // Image.network(widget.image.images.first.link),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -92,8 +81,18 @@ class _HomeCardState extends State<HomeCard> {
                     : Color.fromARGB(255, 255, 255, 255),
                 icon: fav == true ? fav_fill : fav_border,
                 onPressed: () {
-                  widget.image.favGalery();
+                  if (widget.image.in_gallery == false &&
+                      widget.image.favorite == true) {
+                    print("id CONDITION");
+                    print(widget.id);
+                    print("not in gallery and favorite");
+                    widget.image.favGalery(widget.id);
+                  } else {
+                    widget.image.favGalery(widget.image.id);
+                  }
                   widget.image.images.first.favImage();
+                  print("ON TOUCH");
+                  inspect(widget.image);
                   widget.image.favorite_count +=
                       widget.image.favorite == true ? -1 : 1;
                   setState(() {
@@ -121,3 +120,5 @@ class _HomeCardState extends State<HomeCard> {
     );
   }
 }
+
+const ImgurAPIClientID = "7dbef5d1452d32b";

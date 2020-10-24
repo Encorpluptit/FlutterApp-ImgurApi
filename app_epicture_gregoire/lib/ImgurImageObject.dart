@@ -117,6 +117,9 @@ class ImgurImageData {
       "https://api.imgur.com/3/image/$id/favorite",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
+    print("image");
+    print("id");
+    print(id);
     print(request.body);
   }
 }

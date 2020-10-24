@@ -31,8 +31,9 @@ class _HomeState extends State<Home> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print("LOAD");
-            for (var item in snapshot.data)
-              if (item.images.first.mp4_size == null) inspect(item);
+            inspect(snapshot.data[1]);
+            // for (var item in snapshot.data)
+            //   if (item.images.first.mp4_size == null) inspect(item);
             return ListView(
               children: [
                 Column(

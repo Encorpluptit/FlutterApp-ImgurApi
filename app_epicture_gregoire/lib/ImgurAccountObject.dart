@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'ImgurGaleryObject.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -80,3 +82,5 @@ class ImgurAccountBase {
     //     .toList();
   }
 }
+
+const ImgurClientid = "4307dca97df57f9";

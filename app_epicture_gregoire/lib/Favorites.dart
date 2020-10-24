@@ -9,7 +9,7 @@ import 'ImgurGaleryObject.dart';
 
 class Favorites extends StatelessWidget {
   ImgurAccountBase account;
-
+  int index = 0;
   Favorites({this.account});
 
   @override
@@ -26,9 +26,15 @@ class Favorites extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      for (var item in snapshot.data)
-                        if (item.images.first.mp4_size == null)
-                          if (item.in_gallery == false) HomeCard(image: item),
+                      for (var index = 0; index < snapshot.data.length; index++)
+                        if (snapshot.data[index].images.first.mp4_size == null)
+                          if (snapshot.data[index].in_gallery == false)
+                            HomeCard(
+                              image: snapshot.data[index],
+                              id: snapshot.data[index - 1].id,
+                            )
+                      //todo donner a la card l'id du truc avant pour del l'autre oue je me comprend tavu
+                      // for (var item in snapshot.data)
                     ],
                   )
                 ],
