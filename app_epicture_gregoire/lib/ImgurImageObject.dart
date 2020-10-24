@@ -112,10 +112,11 @@ class ImgurImageData {
   }
 
   void favImage(String hash) async {
-    print("https://api.imgur.com/3/image/$hash/favorite");
     final request = await http.post(
       "https://api.imgur.com/3/image/$hash/favorite",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
+    print(request.body);
   }
+
 }
