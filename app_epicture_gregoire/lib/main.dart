@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 203, 175, 135),
         body: Center(
           child: FutureBuilder<bool>(
               future: user.fetchToken(trigered),
@@ -32,16 +32,28 @@ class _MyAppState extends State<MyApp> {
                 if (snapshot.hasData && snapshot.data == true) {
                   return Heart(user: user);
                 }
-                return RaisedButton(
-                  child: Text("Connect With Imgur"),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    setState(() {
-                      trigered = true;
-                    });
-                  },
-                  color: Colors.red[600],
-                );
+                return Column(children: [
+                  Container(height: 200),
+                  Text(
+                    "EPICTURE",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 48, 71, 94),
+                      fontSize: 50,
+                      fontFamily: 'RobotoMono',
+                    ),
+                  ),
+                  Container(height: 200),
+                  RaisedButton(
+                    child: Text("Connect With Imgur"),
+                    textColor: Colors.white,
+                    onPressed: () {
+                      setState(() {
+                        trigered = true;
+                      });
+                    },
+                    color: Color.fromARGB(255, 48, 71, 94),
+                  )
+                ]);
               }),
         ),
       ),
