@@ -30,7 +30,9 @@ class _HomeState extends State<Home> {
         future: widget.user.getGallery(page: page.toString()),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            // inspect(gallery);
+            print("LOAD");
+            for (var item in snapshot.data)
+              if (item.images.first.mp4_size == null) inspect(item);
             return ListView(
               children: [
                 Column(

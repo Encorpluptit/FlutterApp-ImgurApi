@@ -62,7 +62,7 @@ class ImgurAccountBase {
   }
 
   Future<List<ImgurGallery>> getFavoriteImages() async {
-  // Future<List<ImgurImageData>> getFavoriteImages() async {
+    // Future<List<ImgurImageData>> getFavoriteImages() async {
     final response = await http.get(
       "https://api.imgur.com/3/account/$url/favorites",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
