@@ -54,7 +54,7 @@ class ImgurAccountBase {
       "https://api.imgur.com/3/account/$url/images",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
-    print("json value");
+    print(response.body);
     return json
         .decode(response.body)['data']
         .map<ImgurGallery>((image) => ImgurGallery.fromJson(image, accessToken))

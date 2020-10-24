@@ -5,16 +5,19 @@ import 'HomeCard.dart';
 import 'ImgurAccountObject.dart';
 import 'ImgurGaleryObject.dart';
 
-class Favorites extends StatelessWidget {
+class Favorites extends StatefulWidget {
   ImgurAccountBase account;
-
   Favorites({this.account});
+  @override
+  _Favorites createState() => _Favorites();
+}
 
+class _Favorites extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<List<ImgurGallery>>(
-          future: account.getFavoriteImages(),
+          future: widget.account.getFavoriteImages(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(
