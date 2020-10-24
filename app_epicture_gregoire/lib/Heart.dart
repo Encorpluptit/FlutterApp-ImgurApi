@@ -7,6 +7,7 @@ import 'Home.dart';
 import 'Account.dart';
 import 'Favorites.dart';
 import 'AddPost.dart';
+import 'Search.dart';
 
 class Heart extends StatefulWidget {
   final String token;
@@ -17,8 +18,14 @@ class Heart extends StatefulWidget {
 }
 
 class _Heartstate extends State<Heart> {
-  int index = 0;
+  int _selectedIndex = 0;
   ImgurAccountBase account;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -31,6 +38,9 @@ class _Heartstate extends State<Heart> {
   Widget returnScreen(int indexValue) {
     if (indexValue == 0) {
       return Home(user: widget.user);
+    }
+    if (indexValue == 1) {
+      return Search(user: widget.user);
     }
     if (indexValue == 2) {
       return AddPost(user: widget.user);
@@ -45,6 +55,7 @@ class _Heartstate extends State<Heart> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: const Text(
           'Epicture',
@@ -55,16 +66,46 @@ class _Heartstate extends State<Heart> {
         toolbarHeight: 40.00,
         backgroundColor: Color.fromARGB(255, 231, 222, 200),
       ),
-      body: Center(child: returnScreen(index)),
+      body: Center(child: returnScreen(_selectedIndex)),
       // body: Center(child: _widgetOptions.elementAt(index)),
-      bottomNavigationBar: MyNavigation(
-        index,
-        (int val) {
-          setState(() {
-            index = val;
-          });
-        },
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Likes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Account',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Color.fromARGB(255, 48, 71, 94),
+        backgroundColor: Color.fromARGB(255, 231, 222, 200),
+        onTap: _onItemTapped,
       ),
+      // bottomNavigationBar: MyNavigation(
+      //   index,
+      //   (int val) {
+      //     setState(() {
+      //       index = val;
+      //     });
+      //   },
+      // ),
     );
   }
 }

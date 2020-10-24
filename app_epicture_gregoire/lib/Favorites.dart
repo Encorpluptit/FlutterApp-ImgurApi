@@ -68,7 +68,6 @@ class FavoriteImageState extends State<FavoriteImage> {
                   context: context,
                   useRootNavigator: true,
                   builder: (_) => FavImageDialog(image: widget.image));
-              Navigator.of(context).pop();
             },
             child: Container(
               decoration: BoxDecoration(
@@ -76,7 +75,6 @@ class FavoriteImageState extends State<FavoriteImage> {
                     fit: BoxFit.cover, image: NetworkImage(widget.image.link)),
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
-
               // child: IconButton(
               //   icon: Icon(Icons.android),
               //   iconSize: 5,
