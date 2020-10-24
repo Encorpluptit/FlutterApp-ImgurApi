@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'HomeCard.dart';
 import 'ImgurAccountObject.dart';
-import 'Account.dart';
 import 'ImgurGaleryObject.dart';
 
 class Favorites extends StatelessWidget {
@@ -20,7 +19,6 @@ class Favorites extends StatelessWidget {
           future: account.getFavoriteImages(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              inspect(snapshot.data);
               return ListView(
                 children: [
                   Column(

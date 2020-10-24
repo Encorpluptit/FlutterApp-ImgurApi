@@ -82,21 +82,40 @@ class _HomeCardState extends State<HomeCard> {
                 },
                 iconSize: 45,
               ),
-              Text(widget.image.favorite_count.toString(),
-                  style: TextStyle(color: Colors.white)),
-              IconButton(
-                color: Color.fromARGB(255, 255, 255, 255),
-                icon: Icon(Icons.comment),
-                onPressed: () {
-                  //TODO : go to comment screen and send it to imgure
-                  print("GO COMMENTER");
-                },
-              ),
-              Text(widget.image.comment_count.toString(),
-                  style: TextStyle(color: Colors.white))
-            ],
-          )
-        ],
+            ]),
+            Image.network(widget.image.images.first.link),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  color: widget.image.favorite == true
+                      ? Color.fromARGB(255, 255, 0, 0)
+                      : Color.fromARGB(255, 255, 255, 255),
+                  icon: widget.image.favorite == true ? fav_fill : fav_border,
+                  onPressed: () {
+                    widget.image.images.first.favImage(widget.image.images.first.id.toString());
+                    widget.image.favorite_count += widget.image.favorite == true ? -1 : 1 ;
+                    setState(() {
+                      widget.image.favorite = !widget.image.favorite;
+                    });
+                  },
+                ),
+                Text(widget.image.favorite_count.toString(),
+                    style: TextStyle(color: Colors.white)),
+                IconButton(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  icon: Icon(Icons.comment),
+                  onPressed: () {
+                    //TODO : go to comment screen and send it to imgure
+                    print("GO COMMENTER");
+                  },
+                ),
+                Text(widget.image.comment_count.toString(),
+                    style: TextStyle(color: Colors.white))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
