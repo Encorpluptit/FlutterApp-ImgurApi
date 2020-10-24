@@ -63,7 +63,6 @@ class PostState extends State<AddPost> {
     if (postState == 1) {
       return initStateforPost();
     }
-
     if (postState == 2) {
       return fromgallery();
     }
@@ -71,6 +70,10 @@ class PostState extends State<AddPost> {
       return fromPhoto();
     }
     if (postState == 4) {
+      if (_image == null)
+        setState(() {
+          postState = 1;
+        });
       return buildPost();
     }
     return Text("ohh it's semme broken");
