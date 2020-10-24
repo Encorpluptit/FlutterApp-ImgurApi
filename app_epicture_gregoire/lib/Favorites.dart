@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_epicture_gregoire/ImgurImageObject.dart';
 import 'package:flutter/material.dart';
 
@@ -18,22 +20,17 @@ class Favorites extends StatelessWidget {
           future: account.getFavoriteImages(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              print("LOOOOl");
-              for (var item in snapshot.data)
-                print(item.images.first.link);
+              inspect(snapshot.data);
               return ListView(
                 children: [
-
-                Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  for (var item in snapshot.data)
-                    if (item.images.first.mp4_size == null)
-                      HomeCard(
-                        image: item
-                      ),
-                  ]
-                )
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      for (var item in snapshot.data)
+                        if (item.images.first.mp4_size == null)
+                          HomeCard(image: item),
+                    ],
+                  )
                 ],
               );
             } else if (snapshot.hasError) {

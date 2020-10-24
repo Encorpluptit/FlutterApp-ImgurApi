@@ -74,7 +74,6 @@ class BasicCall {
       print("Not loggedin");
       throw Exception("Not loggedin");
     }
-    print(page);
     final response = await http.get(
       "https://api.imgur.com/3/gallery/$section/$sort/$window/$page?showViral=$showViral",
       headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
@@ -137,7 +136,6 @@ class BasicCall {
 
     final uri = Uri.encodeFull(
         "https://api.imgur.com/3/gallery/search/$sort/$window/$page?q=${(searchType == null) ? '' : "$searchType:"}$query");
-    print(uri);
     final response = await http.get(
       uri,
       headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},

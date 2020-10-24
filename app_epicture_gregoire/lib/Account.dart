@@ -34,14 +34,16 @@ class Account extends StatelessWidget {
                           alignment: Alignment.center,
                           child: ListTile(
                             // leading: Icon(Icons.album, size: 50),
-                            title:  Text(
+                            title: Text(
                               account.url,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 40),
                             ),
                             subtitle: Text(
-                              account.bio != null ? account.bio : "No Description",
+                              account.bio != null
+                                  ? account.bio
+                                  : "No Description",
                               // 'TWICE',
                               textAlign: TextAlign.center,
                             ),
@@ -60,7 +62,6 @@ class Account extends StatelessWidget {
                           //   style: TextStyle(
                           //       fontWeight: FontWeight.w600, fontSize: 20),
                           // ),
-
                         ),
                         SizedBox(height: 20),
 
@@ -90,7 +91,7 @@ class Account extends StatelessWidget {
                               Column(
                                 children: <Widget>[
                                   AccountCardFav(
-                                        () {
+                                    () {
                                       int count = 0;
                                       // for (var item in snapshot.data)
                                       //   count += item.favorite_count;
@@ -109,11 +110,6 @@ class Account extends StatelessWidget {
                                 children: List.generate(
                           snapshot.data.length,
                           (index) {
-                            print(snapshot.data
-                                .elementAt(index)
-                                .images
-                                .first
-                                .link);
                             return AccountCardImage(
                               src: snapshot.data
                                   .elementAt(index)
@@ -132,7 +128,6 @@ class Account extends StatelessWidget {
               print('error');
               return Text("${snapshot.error}");
             }
-            print("lol");
             return CircularProgressIndicator();
           }),
     );

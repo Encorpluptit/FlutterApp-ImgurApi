@@ -25,8 +25,8 @@ class SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    print("SEARCH");
-    inspect(gallery);
+    // print("SEARCH");
+    // inspect(gallery);
     return Theme(
         data: ThemeData(
           primaryColor: Colors.grey[800],
@@ -36,7 +36,6 @@ class SearchState extends State<Search> {
           TextField(
             controller: myController,
             onEditingComplete: () {
-              print(myController);
               widget.user
                   .searchGallery(query: myController.text)
                   .then((val) => setState(() {

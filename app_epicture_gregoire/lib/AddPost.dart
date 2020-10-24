@@ -28,9 +28,9 @@ class PostState extends State<AddPost> {
 
   @override
   Widget build(BuildContext context) {
-    inspect(_image);
-    inspect(myController);
-    inspect(myController2);
+    // inspect(_image);
+    // inspect(myController);
+    // inspect(myController2);
     return Center(
       child: checkState(),
     );

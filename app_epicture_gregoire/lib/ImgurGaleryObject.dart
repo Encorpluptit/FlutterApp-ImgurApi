@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'ImgurImageObject.dart';
 import 'ImgurTagObject.dart';
 import 'dart:io';

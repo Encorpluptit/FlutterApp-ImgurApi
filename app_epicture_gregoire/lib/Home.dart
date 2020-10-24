@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:app_epicture_gregoire/Account.dart';
 import 'Global.dart';
 import 'HomeCard.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class _HomeState extends State<Home> {
         future: widget.user.getGallery(page: page.toString()),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            inspect(gallery);
+            // inspect(gallery);
             return ListView(
               children: [
                 Column(

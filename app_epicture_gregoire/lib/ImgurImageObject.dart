@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'ImgurTagObject.dart';
 import 'package:http/http.dart' as http;
@@ -117,5 +118,9 @@ class ImgurImageData {
       "https://api.imgur.com/3/image/$hash/favorite",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
+    bool res = await json.decode(request.body)['success'];
+    if (res) {
+      this.favorite = true;
+    }
   }
 }
