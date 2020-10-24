@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'ImgurAccountObject.dart';
 import 'ImgurGaleryObject.dart';
+import 'ImageDialog.dart';
 
 class Account extends StatelessWidget {
   ImgurAccountBase account;
@@ -281,23 +282,23 @@ class AccountInfos extends StatelessWidget {
     );
   }
 }
-
-class ImageDialog extends StatelessWidget {
-  final String src;
-
-  const ImageDialog({Key key, this.src}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.95,
-        // height: 200,
-        child: FittedBox(
-          child: Image.network(src),
-          fit: BoxFit.fill,
-        ),
-      ),
-    );
-  }
-}
+//
+// class ImageDialog extends StatelessWidget {
+//   final String src;
+//
+//   const ImageDialog({Key key, this.src}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Dialog(
+//       child: Container(
+//         width: MediaQuery.of(context).size.width * 0.95,
+//         // height: 200,
+//         child: FittedBox(
+//           child: Image.network(src),
+//           fit: BoxFit.fill,
+//         ),
+//       ),
+//     );
+//   }
+// }
