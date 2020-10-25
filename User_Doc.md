@@ -100,10 +100,14 @@
     <img width="25%" src=Ressources/4.1_SearchPage.png>
 </p>
 
-#### You can search for an image by writing in the research bar.
+#### You can search for an image by writing in the research bar and validate your search.
 
 <p align="center" width="100%">
     <img width="25%" src=Ressources/4.2_SearchPage.png>
+</p>
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/4.3_SearchPage.png>
 </p>
 
 
