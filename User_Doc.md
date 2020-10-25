@@ -37,7 +37,7 @@ img
 
 This application use Imgur Authentication. You must [log in](https://imgur.com/signin) with an Imgur Account or [create one](https://imgur.com/register) if you don't have one.
 
-![Image in .github/assets](Ressources/1_WelcomePage.png#center)
+![Image in .github/assets](Ressources/1_WelcomePage.png)
     
 
 You must connect to Imgur with your Username (or Email) and Password.
