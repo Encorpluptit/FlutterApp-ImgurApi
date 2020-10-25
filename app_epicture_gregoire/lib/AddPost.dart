@@ -100,7 +100,11 @@ class PostState extends State<AddPost> {
             labelText: 'Title (needed)',
           ),
         ),
-        Image.file(_image),
+        Image.file(
+            _image,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width,
+        ),
         TextField(
           controller: myController2,
           decoration: InputDecoration(

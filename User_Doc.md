@@ -1,17 +1,16 @@
 
 
 # User Documentation
-- [User Documentation](#user-documentation)
-  * [Installation.](#installation)
-  * [Connexion to Imgur](#connexion-to-imgur)
-  * [First Steps](#first-steps)
-    + [Main Feed (Hot Gallery)](#main-feed--hot-gallery-)
-  * [Account](#account)
-  * [Search For Images](#search-for-images)
-  * [Favorites](#favorites)
-  * [Add an Image](#add-an-image)
-    + [Select From Gallery.](#select-from-gallery)
-    + [Take A picture.](#take-a-picture)
+* [Installation.](#installation)
+* [Connexion to Imgur](#connexion-to-imgur)
+* [First Steps](#first-steps)
+  + [Main Feed (Hot Gallery)](#main-feed--hot-gallery-)
+* [Account](#account)
+* [Search For Images](#search-for-images)
+* [Favorites](#favorites)
+* [Add an Image](#add-an-image)
+  + [Select From Gallery.](#select-from-gallery)
+  + [Take A picture.](#take-a-picture)
 ## Installation.
 
  - Download the app-relese.apk file.
@@ -168,7 +167,7 @@
     <img width="25%" src=Ressources/8.31_GalleryImage.png>
 </p>
 
-#### Check in your Profile menu to access this photo.
+#### Check in your Account menu to access this photo.
 
 <p align="center" width="100%">
     <img width="25%" src=Ressources/8.41_GalleryImage.png>
@@ -178,26 +177,33 @@
 ### Take A picture.
 ---
 
+#### Take a picture with your mobile camera.
+
 <p align="center" width="100%">
-    <img width="25%" src=Ressources/5.3_AddImagePage.png>
+    <img width="25%" src=Ressources/8.51_GalleryImage.png>
 </p>
 
+#### Once you're satisfied with the picture just taken, validate it.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.61_GalleryImage.png>
+</p>
 
 #### Give your image a title and optionally a comment.
 
 <p align="center" width="100%">
-    <img width="25%" src=Ressources/8.21_GalleryImage.png>
+    <img width="25%" src=Ressources/8.71_GalleryImage.png>
 </p>
 
 #### Click the button to upload your image.
 
 <p align="center" width="100%">
-    <img width="25%" src=Ressources/8.31_GalleryImage.png>
+    <img width="25%" src=Ressources/8.81_GalleryImage.png>
 </p>
 
-#### Check in your Profile menu to access this photo.
+#### Check in your Account menu to access this photo.
 
 <p align="center" width="100%">
-    <img width="25%" src=Ressources/8.41_GalleryImage.png>
+    <img width="25%" src=Ressources/8.91_GalleryImage.png>
 </p>
 
