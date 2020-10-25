@@ -1,5 +1,3 @@
-
-
 # User Documentation
 * [Installation.](#installation)
 * [Connexion to Imgur](#connexion-to-imgur)
@@ -11,6 +9,7 @@
 * [Add an Image](#add-an-image)
   + [Select From Gallery.](#select-from-gallery)
   + [Take A picture.](#take-a-picture)
+
 ## Installation.
 
  - Download the app-relese.apk file.

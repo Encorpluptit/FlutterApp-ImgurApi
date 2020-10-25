@@ -29,3 +29,6 @@ apidocs.imgur.com
 
 Commentaires, alternance de background pour les différencier
      Boutons upvote downvote en bas
+     logique objet
+     objet global qui nous permet de fetch les infos principales de l'app -> methodes qui return objects structuré selon les réponses API
+     ces objets -> methodes

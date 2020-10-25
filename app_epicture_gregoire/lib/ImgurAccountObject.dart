@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'ImgurGaleryObject.dart';
+import 'ImgurGalleryObject.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:async';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ImgurAccountObject.dart';
-import 'ImgurGaleryObject.dart';
+import 'ImgurGalleryObject.dart';
 import 'ImageDialog.dart';
 
 class Account extends StatelessWidget {

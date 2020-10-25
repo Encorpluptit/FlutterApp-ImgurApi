@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'ImgurAccountObject.dart';
-import 'ImgurGaleryObject.dart';
+import 'ImgurGalleryObject.dart';
 
 class Favorites extends StatefulWidget {
   ImgurAccountBase account;

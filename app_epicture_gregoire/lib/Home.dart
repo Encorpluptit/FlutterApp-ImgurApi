@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'Global.dart';
 import 'HomeCard.dart';
 import 'package:flutter/material.dart';
-import 'ImgurGaleryObject.dart';
+import 'ImgurGalleryObject.dart';
 
 class Home extends StatefulWidget {
   BasicCall user;

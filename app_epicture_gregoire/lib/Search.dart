@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'Global.dart';
-import 'ImgurGaleryObject.dart';
+import 'ImgurGalleryObject.dart';
 import 'HomeCard.dart';
 
 class Search extends StatefulWidget {

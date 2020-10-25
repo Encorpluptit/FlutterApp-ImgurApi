@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'ImgurAccountObject.dart';
-import 'ImgurGaleryObject.dart';
+import 'ImgurGalleryObject.dart';
 import 'ImgurImageObject.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 
