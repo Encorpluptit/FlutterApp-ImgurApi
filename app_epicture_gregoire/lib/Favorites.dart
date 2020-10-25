@@ -1,6 +1,5 @@
 import 'dart:developer';
-
-import 'package:app_epicture_gregoire/ImgurImageObject.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'ImgurAccountObject.dart';
@@ -9,6 +8,7 @@ import 'ImgurGaleryObject.dart';
 class Favorites extends StatefulWidget {
   ImgurAccountBase account;
   int index = 0;
+  bool reload = false;
   Favorites({this.account});
 
   @override
@@ -16,6 +16,10 @@ class Favorites extends StatefulWidget {
 }
 
 class _Favorites extends State<Favorites> {
+  void reload() {
+    setState(() {widget.reload = !widget.reload;});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -23,39 +27,18 @@ class _Favorites extends State<Favorites> {
           future: widget.account.getFavoriteImages(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              print("hello");
               inspect(snapshot.data);
-              // return ListView(
-              //   children: [
-              //     Column(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: <Widget>[
-              //         for (var index = 0; index < snapshot.data.length; index++)
-              //           if (snapshot.data[index].images.first.mp4_size == null)
-              //             if (snapshot.data[index].in_gallery == false)
-              //               HomeCard(
-              //                 image: snapshot.data[index],
-              //                 id: snapshot.data[index - 1].id,
-              //               )
-              //         //todo donner a la card l'id du truc avant pour del l'autre oue je me comprend tavu
-              //         // for (var item in snapshot.data)
-              //       ],
-              //     )
-              //   ],
-              // );
               return Container(
                   child: Wrap(
+                      direction: Axis.vertical,
                       children: List.generate(
                 snapshot.data.length,
                 (index) {
-                  print(snapshot.data.elementAt(index).images.first.link);
-                  print(snapshot.data.elementAt(index).favorite_count);
-                  print(index - 1);
-
                   if (snapshot.data[index].in_gallery == false)
                     return FavoriteImage(
                       image: snapshot.data.elementAt(index),
                       id: snapshot.data[index].id,
+                      reloadPage: (ImgurGallery obj) {snapshot.data.remove(obj);sleep(Duration(milliseconds: 750));reload();},
                     );
                   return Container();
                 },
@@ -72,8 +55,9 @@ class _Favorites extends State<Favorites> {
 class FavoriteImage extends StatefulWidget {
   String id;
   ImgurGallery image;
+  Function reloadPage;
 
-  FavoriteImage({this.image, this.id});
+  FavoriteImage({this.image, this.id, this.reloadPage});
 
   @override
   FavoriteImageState createState() => FavoriteImageState();
@@ -99,6 +83,7 @@ class FavoriteImageState extends State<FavoriteImage> {
                   builder: (_) => FavImageDialog(
                         image: widget.image,
                         id: widget.id,
+                        reloadPage: widget.reloadPage,
                       ));
             },
             child: Container(
@@ -108,12 +93,6 @@ class FavoriteImageState extends State<FavoriteImage> {
                     image: NetworkImage(widget.image.images.first.link)),
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
-              // child: IconButton(
-              //   icon: Icon(Icons.android),
-              //   iconSize: 5,
-              //   color: Colors.white,
-              //   onPressed: () {},
-              // ),
             ),
           ),
         ));
@@ -123,8 +102,9 @@ class FavoriteImageState extends State<FavoriteImage> {
 class FavImageDialog extends StatefulWidget {
   ImgurGallery image;
   String id;
+  Function reloadPage;
 
-  FavImageDialog({this.image, this.id});
+  FavImageDialog({this.image, this.id, this.reloadPage});
 
   @override
   _FavImageDialog createState() => _FavImageDialog();
@@ -135,7 +115,7 @@ class _FavImageDialog extends State<FavImageDialog> {
   Widget build(BuildContext context) {
     print(widget.image.favorite);
     return AlertDialog(
-      // title: Text(widget.image.title ),
+      insetPadding: EdgeInsets.all(8.0),
       content: Container(
         width: MediaQuery.of(context).size.width * 0.95,
         child: FittedBox(
@@ -151,16 +131,14 @@ class _FavImageDialog extends State<FavImageDialog> {
       ),
       actions: [
         IconButton(
-          // padding: EdgeInsets.all(8.0),
           icon: Icon(Icons.favorite),
           iconSize: 40,
           color: Colors.blue,
           onPressed: () {
             widget.image.favGalery(widget.id);
             widget.image.images.first.favImage();
-            // widget.image.favImage(widget.image.id.toString());
+            widget.reloadPage(widget.image);
             Navigator.of(context).pop();
-            Navigator.of(context).reassemble();
           },
         ),
       ],

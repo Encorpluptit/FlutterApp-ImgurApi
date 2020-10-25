@@ -47,7 +47,16 @@ class Account extends StatelessWidget {
                               ),
                               Column(
                                 children: <Widget>[
-                                  AccountCardFollow(subtitle: 5),
+                                  AccountCardFollow(
+                                        () {
+                                      int count = 0;
+                                      for (var item in snapshot.data) {
+                                        print(item.favorite_count);
+                                        count += item.favorite_count;
+                                      }
+                                      return count;
+                                    },
+                                  ),
                                 ],
                               ),
                               Column(
@@ -55,8 +64,6 @@ class Account extends StatelessWidget {
                                   AccountCardView(
                                     () {
                                       int count = 0;
-                                      // for (var item in snapshot.data)
-                                      //   print(item.favorite_count);
                                       for (var item in snapshot.data)
                                         count += item.views;
                                       return count;
@@ -130,16 +137,17 @@ class AccountCardView extends AccountCardInfos {
 
 class AccountCardFollow extends AccountCardInfos {
   static const String staticTitle = "Follows";
+  final int Function() count;
 
-  const AccountCardFollow({Key key, int subtitle})
-      : super(key: key, value: subtitle);
+  const AccountCardFollow(this.count, {Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AccountCardInfos(
         title: staticTitle,
-        value: this.value,
-        icon: Icon(Icons.supervised_user_circle_rounded, size: 20));
+        value: this.count(),
+        icon: Icon(Icons.favorite, size: 20));
   }
 }
 
@@ -273,23 +281,3 @@ class AccountInfos extends StatelessWidget {
     );
   }
 }
-//
-// class ImageDialog extends StatelessWidget {
-//   final String src;
-//
-//   const ImageDialog({Key key, this.src}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Dialog(
-//       child: Container(
-//         width: MediaQuery.of(context).size.width * 0.95,
-//         // height: 200,
-//         child: FittedBox(
-//           child: Image.network(src),
-//           fit: BoxFit.fill,
-//         ),
-//       ),
-//     );
-//   }
-// }

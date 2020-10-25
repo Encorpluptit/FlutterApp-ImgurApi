@@ -96,7 +96,7 @@ class ImgurGallery {
       description: json['description'],
       downs: json['downs'],
       favorite: json['favorite'],
-      favorite_count: json['favorite_count'],
+      favorite_count: json['favorite_count'] != null ? json['favorite_count'] : 0,
       id: json['id'],
       images: json['images'] != null
           ? (json['images'] as List)
