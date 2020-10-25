@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'ImgurImageObject.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -114,7 +116,6 @@ class ImgurGallery {
       section: json['section'],
       title: json['title'],
       topic: json['topic'],
-      // topic_id: json['topic_id'],
       ups: json['ups'] != null ? json['ups'] : 0,
       views: json['views'],
       vote: json['vote'],
@@ -125,5 +126,51 @@ class ImgurGallery {
       "https://api.imgur.com/3/album/$value/favorite",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
+  }
+
+  Future<bool> upvote() async {
+    if (vote == "up") {
+      return veto();
+    }
+    bool res = await _setVote("up");
+    if (res) {
+      vote = "up";
+      ups += 1;
+    }
+    return res;
+  }
+
+  Future<bool> downvote() async {
+    if (vote == "down") {
+      return veto();
+    }
+    bool res = await _setVote("down");
+    if (res) {
+      vote = "down";
+      downs += 1;
+    }
+    return res;
+  }
+
+  Future<bool> veto() async {
+    bool res = await _setVote("up");
+    if (res) {
+      if (vote == "up") {
+        ups -= 1;
+      } else {
+        downs -= 1;
+      }
+      vote = null;
+    }
+    return res;
+  }
+
+  Future<bool> _setVote(vote) async {
+    final response = await http.post(
+      "https://api.imgur.com/3/gallery/$id/vote/$vote",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
+    );
+    Map<String, dynamic> res = json.decode(response.body);
+    return res['success'];
   }
 }

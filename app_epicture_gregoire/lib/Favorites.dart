@@ -36,7 +36,7 @@ class _Favorites extends State<Favorites> {
                       children: List.generate(
                         snapshot.data.length,
                         (index) {
-                          inspect(snapshot.data[index]);
+                          // inspect(snapshot.data[index]);
                           if (snapshot.data[index].in_gallery == false) {
                             if ((index - 1) >= 0) {
                               return FavoriteImage(
@@ -49,7 +49,7 @@ class _Favorites extends State<Favorites> {
                         },
                       )));
             } else if (snapshot.hasError) {
-              return Text("ERROR");
+              return Text(snapshot.error);
             }
             return CircularProgressIndicator();
           }),
