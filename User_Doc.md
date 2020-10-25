@@ -92,7 +92,7 @@
 #### You can search for an image by writing in the research bar.
 
 <p align="center" width="100%">
-    <img width="25%" src=Ressources/4.1_SearchPage.png>
+    <img width="25%" src=Ressources/4.2_SearchPage.png>
 </p>
 
 
@@ -124,16 +124,68 @@
     <img width="25%" src=Ressources/5.1_AddImagePage.png>
 </p>
 
+---
 ### Select From Gallery.
+---
 
 <p align="center" width="100%">
     <img width="25%" src=Ressources/5.2_AddImagePage.png>
 </p>
 
+#### Allow the App to access your Photos.
 
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.01_GalleryImage.png>
+</p>
+
+#### Select an image from your personal gallery.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.11_GalleryImage.png>
+</p>
+
+#### Give your image a title and optionally a comment.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.21_GalleryImage.png>
+</p>
+
+#### Click the button to upload your image.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.31_GalleryImage.png>
+</p>
+
+#### Check in your Profile menu to access this photo.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.41_GalleryImage.png>
+</p>
+
+---
 ### Take A picture.
+---
 
 <p align="center" width="100%">
     <img width="25%" src=Ressources/5.3_AddImagePage.png>
+</p>
+
+
+#### Give your image a title and optionally a comment.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.21_GalleryImage.png>
+</p>
+
+#### Click the button to upload your image.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.31_GalleryImage.png>
+</p>
+
+#### Check in your Profile menu to access this photo.
+
+<p align="center" width="100%">
+    <img width="25%" src=Ressources/8.41_GalleryImage.png>
 </p>
 
