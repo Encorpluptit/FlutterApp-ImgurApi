@@ -38,10 +38,12 @@ class _Favorites extends State<Favorites> {
                         (index) {
                           inspect(snapshot.data[index]);
                           if (snapshot.data[index].in_gallery == false) {
-                            return FavoriteImage(
-                              image: snapshot.data.elementAt(index),
-                              id: snapshot.data[index - 1].id,
-                            );
+                            if ((index - 1) >= 0) {
+                              return FavoriteImage(
+                                image: snapshot.data.elementAt(index),
+                                id: snapshot.data[index - 1].id,
+                              );
+                            }
                           }
                           return Container();
                         },
