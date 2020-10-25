@@ -1,3 +1,10 @@
+<style>
+img[src*='#center'] {
+    display: block;
+    margin: auto;
+}
+</style>
+
 # User Documentation
 
 ## Installation
@@ -34,9 +41,3 @@ Or use one of these available connection solution.
 
 
 
-<style>
-img[src*='#center'] {
-    display: block;
-    margin: auto;
-}
-</style>
