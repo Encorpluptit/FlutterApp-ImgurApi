@@ -85,23 +85,14 @@ class BasicCall {
         .toList();
   }
 
-  Future<ImgurImageData> uploadImage(
-      {bool video = false,
-      dynamic data,
-      String album,
-      String type = "file",
-      String name,
-      String title,
-      String description,
-      int disableAudio}) async {
+  Future<ImgurImageData> uploadImage({
+    dynamic data,
+    String name,
+    String title,
+    String description,
+  }) async {
     var request = http.MultipartRequest(
         "POST", Uri.parse("https://api.imgur.com/3/image"));
-    if (album != null) {
-      request.fields["album"] = album;
-    }
-    if (type != null) {
-      request.fields["type"] = type;
-    }
     if (name != null) {
       request.fields["name"] = name;
     }
@@ -111,11 +102,7 @@ class BasicCall {
     if (description != null) {
       request.fields["description"] = description;
     }
-    if (disableAudio != null) {
-      request.fields["disable_audio"] = disableAudio as String;
-    }
-    request.files.add(
-        http.MultipartFile.fromBytes(video == false ? "image" : "video", data));
+    request.files.add(http.MultipartFile.fromBytes("image", data));
     request.headers[HttpHeaders.authorizationHeader] = "Bearer $_accessToken";
     final http.StreamedResponse response = await request.send();
     final respBody = await response.stream.bytesToString();
