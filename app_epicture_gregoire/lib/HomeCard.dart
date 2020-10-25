@@ -1,12 +1,6 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'ImgurAccountObject.dart';
 import 'ImgurGalleryObject.dart';
-import 'package:http/http.dart' as http;
 
 class HomeCard extends StatefulWidget {
   String id;
@@ -19,37 +13,19 @@ class HomeCard extends StatefulWidget {
 class _HomeCardState extends State<HomeCard> {
   static const Icon fav_border = Icon(Icons.favorite_border);
   static const Icon fav_fill = Icon(Icons.favorite);
+  final Color green = Colors.green;
+  final Color white = Colors.white;
+
   bool fav = false;
-  String avatar = "https://i.imgur.com/BoN9kdC.png";
 
   @override
   void initState() {
     super.initState();
     fav = widget.image.favorite;
-    // fetchavatar(widget.image.account_url).then((value) => () {
-    //       setState(() {
-    //         avatar = value.avatar;
-    //       });
-    //     });
-    // if (fav) {
-    //   print("CARD");
-    //   print(fav);
-    //   inspect(widget.image);
-    // }
   }
-
-  // Future<ImgurAccountBase> fetchavatar(String username) async {
-  //   final response = await http.get(
-  //     "https://api.imgur.com/3/account/$username",
-  //     headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurAPIClientID"},
-  //   );
-  //   return ImgurAccountBase.fromJson(
-  //       json.decode(response.body)["data"], "", false);
-  // }
 
   @override
   Widget build(BuildContext context) {
-    // inspect(widget.image);
     return Card(
       elevation: 5,
       color: Color.fromARGB(255, 50, 50, 50),
@@ -92,7 +68,7 @@ class _HomeCardState extends State<HomeCard> {
                   }
                   widget.image.images.first.favImage();
                   print("ON TOUCH");
-                  inspect(widget.image);
+                  // inspect(widget.image);
                   widget.image.favorite_count +=
                       widget.image.favorite == true ? -1 : 1;
                   setState(() {
@@ -104,15 +80,30 @@ class _HomeCardState extends State<HomeCard> {
                   style: TextStyle(color: Colors.white, fontSize: 20)),
               IconButton(
                 iconSize: 45,
-                color: Color.fromARGB(255, 255, 255, 255),
-                icon: Icon(Icons.comment),
+                color: widget.image.vote == "up" ? green : white,
+                icon: Icon(Icons.arrow_circle_up),
                 onPressed: () {
-                  //TODO : go to comment screen and send it to imgure
-                  print("GO COMMENTER");
+                  setState(() {
+                    print("up");
+                    widget.image.upvote();
+                  });
                 },
               ),
-              Text(widget.image.comment_count.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 20))
+              Text(widget.image.ups.toString(),
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              IconButton(
+                iconSize: 45,
+                color: widget.image.vote == "down" ? green : white,
+                icon: Icon(Icons.arrow_circle_down),
+                onPressed: () {
+                  setState(() {
+                    widget.image.downvote();
+                    print("down");
+                  });
+                },
+              ),
+              Text(widget.image.downs.toString(),
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
             ],
           )
         ],

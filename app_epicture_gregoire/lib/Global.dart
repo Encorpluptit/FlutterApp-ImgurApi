@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +9,6 @@ import 'ImgurImageObject.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 
 class BasicCall {
-  /// Const declaration
   static const String UploadTypeUrl = "URL";
   static const String UploadTypeFile = "file";
   static const String UploadTypeBase64 = "base64";
@@ -30,7 +30,7 @@ class BasicCall {
     if (val == true) {
       var result = await FlutterWebAuth.authenticate(
           url:
-              "https://api.imgur.com/oauth2/authorize?client_id=$ImgurClientid&response_type=token",
+              "https://api.imgur.com/oauth2/authorize?client_id=$ImgurID&response_type=token",
           callbackUrlScheme: "epicture");
 
       result = result.substring(0, 11) + "?" + result.substring(12);
@@ -52,28 +52,21 @@ class BasicCall {
   }
 
   Future<ImgurAccountBase> getMyAccount() async {
-    // if (_isLoggedIn == false) {
-    //   throw Exception("Not loggedin");
-    // }
     final response = await http.get(
       "https://api.imgur.com/3/account/$_accountUsername",
-      headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
+      headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurID"},
     );
     return ImgurAccountBase.fromJson(
         json.decode(response.body)["data"], _accessToken, true);
   }
 
   Future<List<ImgurGallery>> getGallery({
-    String section = "hot",
+    String section = "top",
     String sort = "viral",
     String page = "0",
     String window = "day",
     String showViral = "true",
   }) async {
-    if (_isLoggedIn == false) {
-      print("Not loggedin");
-      throw Exception("Not loggedin");
-    }
     final response = await http.get(
       "https://api.imgur.com/3/gallery/$section/$sort/$window/$page?showViral=$showViral",
       headers: {HttpHeaders.authorizationHeader: "Bearer $_accessToken"},
@@ -85,23 +78,14 @@ class BasicCall {
         .toList();
   }
 
-  Future<ImgurImageData> uploadImage(
-      {bool video = false,
-      dynamic data,
-      String album,
-      String type = "file",
-      String name,
-      String title,
-      String description,
-      int disableAudio}) async {
+  Future<ImgurImageData> uploadImage({
+    dynamic data,
+    String name,
+    String title,
+    String description,
+  }) async {
     var request = http.MultipartRequest(
         "POST", Uri.parse("https://api.imgur.com/3/image"));
-    if (album != null) {
-      request.fields["album"] = album;
-    }
-    if (type != null) {
-      request.fields["type"] = type;
-    }
     if (name != null) {
       request.fields["name"] = name;
     }
@@ -111,11 +95,7 @@ class BasicCall {
     if (description != null) {
       request.fields["description"] = description;
     }
-    if (disableAudio != null) {
-      request.fields["disable_audio"] = disableAudio as String;
-    }
-    request.files.add(
-        http.MultipartFile.fromBytes(video == false ? "image" : "video", data));
+    request.files.add(http.MultipartFile.fromBytes("image", data));
     request.headers[HttpHeaders.authorizationHeader] = "Bearer $_accessToken";
     final http.StreamedResponse response = await request.send();
     final respBody = await response.stream.bytesToString();
@@ -127,18 +107,12 @@ class BasicCall {
       {String sort = "time",
       String window = "all",
       String page = "0",
-      String query,
-      String searchType}) async {
-    if (_isLoggedIn == false) {
-      print("Not loggedin");
-      throw Exception("Not loggedin");
-    }
-
+      String query}) async {
     final uri = Uri.encodeFull(
-        "https://api.imgur.com/3/gallery/search/$sort/$window/$page?q=${(searchType == null) ? '' : "$searchType:"}$query");
+        "https://api.imgur.com/3/gallery/search/$sort/$window/$page?q=$query");
     final response = await http.get(
       uri,
-      headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
+      headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurID"},
     );
     print(response.body);
     return json
@@ -149,7 +123,6 @@ class BasicCall {
   }
 }
 
-const ImgurClientid = "4307dca97df57f9";
-// const ImgurAPISecret = "7e63730459a273ae05216b94654bcd384b0acdf1";
+const ImgurID = "4307dca97df57f9";
 
 BasicCall _basicCall = BasicCall();

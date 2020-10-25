@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,7 +19,6 @@ class PostState extends State<AddPost> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     myController.dispose();
     myController2.dispose();
     super.dispose();
@@ -28,12 +26,10 @@ class PostState extends State<AddPost> {
 
   @override
   Widget build(BuildContext context) {
-    // inspect(_image);
-    // inspect(myController);
-    // inspect(myController2);
     return Center(
-      child: checkState(),
-    );
+        child: ListView(
+      children: [checkState()],
+    ));
   }
 
   _imgFromCamera() async {
@@ -43,7 +39,11 @@ class PostState extends State<AddPost> {
 
     setState(() {
       _image = image;
-      postState = 4;
+      if (_image == null) {
+        postState = 1;
+      } else {
+        postState = 4;
+      }
     });
   }
 
@@ -55,7 +55,11 @@ class PostState extends State<AddPost> {
 
     setState(() {
       _image = image;
-      postState = 4;
+      if (_image == null) {
+        postState = 1;
+      } else {
+        postState = 4;
+      }
     });
   }
 

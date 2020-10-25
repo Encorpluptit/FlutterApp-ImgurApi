@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'ImgurTagObject.dart';
 import 'package:http/http.dart' as http;
 
 class ImgurImageData {
@@ -36,7 +34,6 @@ class ImgurImageData {
   bool has_sound;
   bool in_most_viral;
   bool is_ad;
-  List<ImgurTag> tags;
 
   ImgurImageData({
     this.accessToken,
@@ -63,7 +60,6 @@ class ImgurImageData {
     this.nsfw,
     this.section,
     this.size,
-    this.tags,
     this.title,
     this.type,
     this.views,
@@ -97,11 +93,6 @@ class ImgurImageData {
       nsfw: json['nsfw'] != null ? json['nsfw'] : false,
       section: json['section'] != null ? json['section'] : null,
       size: json['size'],
-      tags: json['tags'] != null
-          ? json['tags']
-              .map<ImgurTag>((i) => ImgurTag.fromJson(i, accessToken))
-              .toList()
-          : null,
       title: json['title'] != null ? json['title'] : null,
       type: json['type'],
       views: json['views'],
@@ -117,9 +108,5 @@ class ImgurImageData {
       "https://api.imgur.com/3/image/$id/favorite",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
-    print("image");
-    print("id");
-    print(id);
-    print(request.body);
   }
 }

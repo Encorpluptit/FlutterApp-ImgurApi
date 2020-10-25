@@ -30,7 +30,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   @override
   void initState() {
-    // profile = AppData.profiles[0];
     super.initState();
   }
 
@@ -44,11 +43,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
             duration: Duration(milliseconds: 750),
             transitionBuilder: (Widget child, Animation<double> animation) =>
                 SlideTransition(
-                  child: child,
-                  position: Tween<Offset>(
-                      begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0)).animate(
-                      animation),
-                ),
+              child: child,
+              position:
+                  Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+                      .animate(animation),
+            ),
             child: HeaderSection(
               profile: profile,
             ),
@@ -56,28 +55,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           SizedBox(height: 40),
           Container(
             child: Wrap(
-              children: <Widget>[
-                // for (int i = 0; i < AppData.profiles.length; i++)
-                //   GestureDetector(
-                //     onTap: () {
-                //       profile = AppData.profiles[i];
-                //       setState(() {});
-                //     },
-                //     child: Container(
-                //       height: MediaQuery
-                //           .of(context)
-                //           .size
-                //           .width / 3,
-                //       width: MediaQuery
-                //           .of(context)
-                //           .size
-                //           .width / 3,
-                //       decoration: BoxDecoration(
-                //           image: DecorationImage(image: AssetImage(AppData
-                //               .profiles[i].imageUrl), fit: BoxFit.cover)),
-                //     ),
-                //   )
-              ],
+              children: <Widget>[],
             ),
           )
         ],

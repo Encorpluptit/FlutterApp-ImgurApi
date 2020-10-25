@@ -16,8 +16,6 @@ class Account extends StatelessWidget {
           future: account.getPersonalImages(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              for (var item in snapshot.data) print(item.favorite_count);
-              print(account.reputationName);
               return ListView(
                 children: [
                   Container(
@@ -34,7 +32,6 @@ class Account extends StatelessWidget {
                             children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  // AccountCardLike(subtitle: 5, list: snapshot.data),
                                   AccountCardLike(
                                     () {
                                       int count = 0;
@@ -48,7 +45,7 @@ class Account extends StatelessWidget {
                               Column(
                                 children: <Widget>[
                                   AccountCardFollow(
-                                        () {
+                                    () {
                                       int count = 0;
                                       for (var item in snapshot.data) {
                                         print(item.favorite_count);
@@ -69,7 +66,6 @@ class Account extends StatelessWidget {
                                       return count;
                                     },
                                   ),
-                                  // AccountCardLike(subtitle: 5),
                                 ],
                               )
                             ],
@@ -139,8 +135,7 @@ class AccountCardFollow extends AccountCardInfos {
   static const String staticTitle = "Follows";
   final int Function() count;
 
-  const AccountCardFollow(this.count, {Key key})
-      : super(key: key);
+  const AccountCardFollow(this.count, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

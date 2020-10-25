@@ -1,7 +1,6 @@
 import 'package:app_epicture_gregoire/Global.dart';
 
 import 'ImgurAccountObject.dart';
-import 'BotomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'Home.dart';
 import 'Account.dart';
@@ -68,7 +67,6 @@ class _Heartstate extends State<Heart> {
         backgroundColor: Color.fromARGB(255, 231, 222, 200),
       ),
       body: Center(child: returnScreen(_selectedIndex)),
-      // body: Center(child: _widgetOptions.elementAt(index)),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -99,14 +97,6 @@ class _Heartstate extends State<Heart> {
         backgroundColor: Color.fromARGB(255, 231, 222, 200),
         onTap: _onItemTapped,
       ),
-      // bottomNavigationBar: MyNavigation(
-      //   index,
-      //   (int val) {
-      //     setState(() {
-      //       index = val;
-      //     });
-      //   },
-      // ),
     );
   }
 }
