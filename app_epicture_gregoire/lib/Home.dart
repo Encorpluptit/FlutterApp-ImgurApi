@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print("LOAD");
-            inspect(snapshot.data[1]);
+            // inspect(snapshot.data[1]);
             // for (var item in snapshot.data)
             //   if (item.images.first.mp4_size == null) inspect(item);
             return ListView(
@@ -44,10 +44,10 @@ class _HomeState extends State<Home> {
                         HomeCard(
                           image: item,
                         ),
-                    for (var item in snapshot.data)
-                      if (item.images.first.mp4_size == null)
+                    for (var i = 0; i < 100 && i != snapshot.data.length; i++)
+                      if (snapshot.data[i].images.first.mp4_size == null)
                         HomeCard(
-                          image: item,
+                          image: snapshot.data[i],
                         ),
                     RaisedButton(
                       child: Text("FETCH"),

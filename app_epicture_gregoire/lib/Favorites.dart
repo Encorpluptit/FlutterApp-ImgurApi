@@ -50,8 +50,14 @@ class _Favorites extends State<Favorites> {
                 (index) {
                   print(snapshot.data.elementAt(index).images.first.link);
                   print(snapshot.data.elementAt(index).favorite_count);
-                  return FavoriteImage(
-                      image: snapshot.data.elementAt(index).images.first);
+                  print(index - 1);
+
+                  if (snapshot.data[index].in_gallery == false)
+                    return FavoriteImage(
+                      image: snapshot.data.elementAt(index),
+                      id: snapshot.data[index].id,
+                    );
+                  return Container();
                 },
               )));
             } else if (snapshot.hasError) {
@@ -64,9 +70,10 @@ class _Favorites extends State<Favorites> {
 }
 
 class FavoriteImage extends StatefulWidget {
-  ImgurImageData image;
+  String id;
+  ImgurGallery image;
 
-  FavoriteImage({this.image});
+  FavoriteImage({this.image, this.id});
 
   @override
   FavoriteImageState createState() => FavoriteImageState();
@@ -89,12 +96,16 @@ class FavoriteImageState extends State<FavoriteImage> {
               await showDialog(
                   context: context,
                   useRootNavigator: true,
-                  builder: (_) => FavImageDialog(image: widget.image));
+                  builder: (_) => FavImageDialog(
+                        image: widget.image,
+                        id: widget.id,
+                      ));
             },
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.cover, image: NetworkImage(widget.image.link)),
+                    fit: BoxFit.cover,
+                    image: NetworkImage(widget.image.images.first.link)),
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
               // child: IconButton(
@@ -110,9 +121,10 @@ class FavoriteImageState extends State<FavoriteImage> {
 }
 
 class FavImageDialog extends StatefulWidget {
-  ImgurImageData image;
+  ImgurGallery image;
+  String id;
 
-  FavImageDialog({this.image});
+  FavImageDialog({this.image, this.id});
 
   @override
   _FavImageDialog createState() => _FavImageDialog();
@@ -144,7 +156,9 @@ class _FavImageDialog extends State<FavImageDialog> {
           iconSize: 40,
           color: Colors.blue,
           onPressed: () {
-            widget.image.favImage(widget.image.id.toString());
+            widget.image.favGalery(widget.id);
+            widget.image.images.first.favImage();
+            // widget.image.favImage(widget.image.id.toString());
             Navigator.of(context).pop();
             Navigator.of(context).reassemble();
           },
