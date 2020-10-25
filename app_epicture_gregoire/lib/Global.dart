@@ -8,7 +8,6 @@ import 'ImgurImageObject.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 
 class BasicCall {
-  /// Const declaration
   static const String UploadTypeUrl = "URL";
   static const String UploadTypeFile = "file";
   static const String UploadTypeBase64 = "base64";
@@ -52,9 +51,6 @@ class BasicCall {
   }
 
   Future<ImgurAccountBase> getMyAccount() async {
-    // if (_isLoggedIn == false) {
-    //   throw Exception("Not loggedin");
-    // }
     final response = await http.get(
       "https://api.imgur.com/3/account/$_accountUsername",
       headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurClientid"},
@@ -70,10 +66,6 @@ class BasicCall {
     String window = "day",
     String showViral = "true",
   }) async {
-    if (_isLoggedIn == false) {
-      print("Not loggedin");
-      throw Exception("Not loggedin");
-    }
     final response = await http.get(
       "https://api.imgur.com/3/gallery/$section/$sort/$window/$page?showViral=$showViral",
       headers: {HttpHeaders.authorizationHeader: "Bearer $_accessToken"},
@@ -116,11 +108,6 @@ class BasicCall {
       String page = "0",
       String query,
       String searchType}) async {
-    if (_isLoggedIn == false) {
-      print("Not loggedin");
-      throw Exception("Not loggedin");
-    }
-
     final uri = Uri.encodeFull(
         "https://api.imgur.com/3/gallery/search/$sort/$window/$page?q=${(searchType == null) ? '' : "$searchType:"}$query");
     final response = await http.get(
@@ -137,6 +124,5 @@ class BasicCall {
 }
 
 const ImgurClientid = "4307dca97df57f9";
-// const ImgurAPISecret = "7e63730459a273ae05216b94654bcd384b0acdf1";
 
 BasicCall _basicCall = BasicCall();

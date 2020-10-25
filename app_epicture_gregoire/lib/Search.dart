@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'Global.dart';
 import 'ImgurGaleryObject.dart';
@@ -18,15 +16,12 @@ class SearchState extends State<Search> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // print("SEARCH");
-    // inspect(gallery);
     return Theme(
         data: ThemeData(
           primaryColor: Colors.grey[800],
@@ -49,14 +44,10 @@ class SearchState extends State<Search> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
               labelText: 'Title (needed)',
               icon: Icon(Icons.search),
-              // fillColor: Color.fromARGB(255, 231, 222, 200),
-              // focusColor: Color.fromARGB(255, 231, 222, 200),
-              // fillColor: Color.fromARGB(255, 231, 222, 200),
             ),
           ),
           if (gallery.length != 0)
             Expanded(
-                // wrap in Expanded
                 child: ListView(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,

@@ -1,12 +1,6 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'ImgurAccountObject.dart';
 import 'ImgurGaleryObject.dart';
-import 'package:http/http.dart' as http;
 
 class HomeCard extends StatefulWidget {
   String id;
@@ -26,26 +20,7 @@ class _HomeCardState extends State<HomeCard> {
   void initState() {
     super.initState();
     fav = widget.image.favorite;
-    // fetchavatar(widget.image.account_url).then((value) => () {
-    //       setState(() {
-    //         avatar = value.avatar;
-    //       });
-    //     });
-    // if (fav) {
-    //   print("CARD");
-    //   print(fav);
-    //   inspect(widget.image);
-    // }
   }
-
-  // Future<ImgurAccountBase> fetchavatar(String username) async {
-  //   final response = await http.get(
-  //     "https://api.imgur.com/3/account/$username",
-  //     headers: {HttpHeaders.authorizationHeader: "Client-ID $ImgurAPIClientID"},
-  //   );
-  //   return ImgurAccountBase.fromJson(
-  //       json.decode(response.body)["data"], "", false);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +82,6 @@ class _HomeCardState extends State<HomeCard> {
                 color: Color.fromARGB(255, 255, 255, 255),
                 icon: Icon(Icons.comment),
                 onPressed: () {
-                  //TODO : go to comment screen and send it to imgure
                   print("GO COMMENTER");
                 },
               ),

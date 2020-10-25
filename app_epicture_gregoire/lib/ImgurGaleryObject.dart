@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'ImgurImageObject.dart';
 import 'ImgurTagObject.dart';
 import 'dart:io';
@@ -96,7 +94,8 @@ class ImgurGallery {
       description: json['description'],
       downs: json['downs'],
       favorite: json['favorite'],
-      favorite_count: json['favorite_count'] != null ? json['favorite_count'] : 0,
+      favorite_count:
+          json['favorite_count'] != null ? json['favorite_count'] : 0,
       id: json['id'],
       images: json['images'] != null
           ? (json['images'] as List)
@@ -134,9 +133,5 @@ class ImgurGallery {
       "https://api.imgur.com/3/album/$value/favorite",
       headers: {HttpHeaders.authorizationHeader: "Bearer $accessToken"},
     );
-    print("gallery");
-    print("id");
-    print(id);
-    // print(request.body);
   }
 }

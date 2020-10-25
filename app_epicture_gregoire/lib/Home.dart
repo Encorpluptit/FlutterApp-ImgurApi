@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'Global.dart';
 import 'HomeCard.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +14,6 @@ class _HomeState extends State<Home> {
   List<ImgurGallery> gallery = new List<ImgurGallery>();
   int page = 0;
 
-  // Future _loadMoreItems(int page) async {
-  //   List<ImgurGallery> tmp = await widget.user.getGallery();
-  //   setState(() {
-  //     // gallery.clear();
-  //     gallery.addAll(tmp);
-  //     end = false;
-  //   });
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -30,10 +21,6 @@ class _HomeState extends State<Home> {
         future: widget.user.getGallery(page: page.toString()),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print("LOAD");
-            // inspect(snapshot.data[1]);
-            // for (var item in snapshot.data)
-            //   if (item.images.first.mp4_size == null) inspect(item);
             return ListView(
               children: [
                 Column(
