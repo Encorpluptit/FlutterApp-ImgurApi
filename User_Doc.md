@@ -84,11 +84,11 @@
 #### You can scroll through your uploaded images and Zoom on it.
 
 <p align="center" width="100%">
-    <img width="25%" src=Ressources/7.3_ProfilePage.png>
+    <img width="25%" src=Ressources/7.5_ProfilePage.png>
 </p>
 
 <p align="center" width="100%">
-    <img width="25%" src=Ressources/7.3_ProfilePage.png>
+    <img width="25%" src=Ressources/7.6_ProfilePage.png>
 </p>
 
 
