@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
         future: widget.user.getGallery(page: page.toString()),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            inspect(snapshot.data[0]);
+            inspect(snapshot.data[1]);
             return ListView(
               children: [
                 Column(
