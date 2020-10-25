@@ -42,7 +42,7 @@ This is the main Screen, accessible with the "Home" Icon.
 You can scroll through viral post and like them.
 
 <p align="center" width="100%">
-    <img width="33%" src=Ressources/3.1_FeedPage.png>
+    <img width="33%" src=Ressources/3.2_FeedPage.png>
 </p>
 
 ## Account
