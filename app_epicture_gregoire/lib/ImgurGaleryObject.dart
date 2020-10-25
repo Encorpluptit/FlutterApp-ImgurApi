@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'ImgurImageObject.dart';
 import 'dart:io';
@@ -130,7 +131,12 @@ class ImgurGallery {
 
   Future<bool> upvote() async {
     if (vote == "up") {
-      return veto();
+      bool res = await _setVote("veto");
+      if (res) {
+        vote = null;
+        ups -= 1;
+      }
+      return res;
     }
     bool res = await _setVote("up");
     if (res) {
@@ -142,25 +148,17 @@ class ImgurGallery {
 
   Future<bool> downvote() async {
     if (vote == "down") {
-      return veto();
+      bool res = await _setVote("veto");
+      if (res) {
+        vote = null;
+        downs -= 1;
+      }
+      return res;
     }
     bool res = await _setVote("down");
     if (res) {
       vote = "down";
       downs += 1;
-    }
-    return res;
-  }
-
-  Future<bool> veto() async {
-    bool res = await _setVote("up");
-    if (res) {
-      if (vote == "up") {
-        ups -= 1;
-      } else {
-        downs -= 1;
-      }
-      vote = null;
     }
     return res;
   }

@@ -16,12 +16,14 @@ class _HomeCardState extends State<HomeCard> {
   final Color green = Colors.green;
   final Color white = Colors.white;
 
+  String solovote = null;
   bool fav = false;
 
   @override
   void initState() {
     super.initState();
     fav = widget.image.favorite;
+    solovote = widget.image.vote;
   }
 
   @override
@@ -80,26 +82,38 @@ class _HomeCardState extends State<HomeCard> {
                   style: TextStyle(color: Colors.white, fontSize: 20)),
               IconButton(
                 iconSize: 45,
-                color: widget.image.vote == "up" ? green : white,
+                color: solovote == "up" ? green : white,
                 icon: Icon(Icons.arrow_circle_up),
                 onPressed: () {
-                  setState(() {
-                    print("up");
-                    widget.image.upvote();
-                  });
+                  print("up");
+                  widget.image.upvote().then((value) => setState(() {
+                        if (widget.image.vote == null) {
+                          solovote = null;
+                          // widget.image.downs -= 1;
+                        } else {
+                          solovote = "up";
+                          // widget.image.ups += 1;
+                        }
+                      }));
                 },
               ),
               Text(widget.image.ups.toString(),
                   style: TextStyle(color: Colors.white, fontSize: 20)),
               IconButton(
                 iconSize: 45,
-                color: widget.image.vote == "down" ? green : white,
+                color: solovote == "down" ? green : white,
                 icon: Icon(Icons.arrow_circle_down),
                 onPressed: () {
-                  setState(() {
-                    widget.image.downvote();
-                    print("down");
-                  });
+                  widget.image.downvote().then((value) => setState(() {
+                        if (widget.image.vote == null) {
+                          solovote = null;
+                          // widget.image.downs -= 1;
+                        } else {
+                          solovote = "down";
+                          // widget.image.ups += 1;
+                        }
+                      }));
+                  print("down");
                 },
               ),
               Text(widget.image.downs.toString(),
