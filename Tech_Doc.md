@@ -1,4 +1,26 @@
 # Technical Documentation
+* [Requirements:](#requirements-)
+* [Install](#install)
+* [Architecture](#architecture)
+  - [lib Folder](#lib-folder)
+  - [main](#main)
+  - [Home](#home)
+  - [HomeCard](#homecard)
+  - [Global](#global)
+  - [Heart](#heart)
+  - [Account](#account)
+  - [AddPost](#addpost)
+  - [Bottom Navigation](#bottom-navigation)
+  - [Favorites](#favorites)
+  - [Image Dialog](#image-dialog)
+  - [ImgurAccountObject](#imguraccountobject)
+  - [ImgurGalleryObject](#imgurgalleryobject)
+  - [ImgurImageObject](#imgurimageobject)
+  - [Search](#search)
+* [android Folder](#android-folder)
+* [ios Folder](#ios-folder)
+* [test Folder](#test-folder)
+* [Commits](#commits)
 
 ## Requirements:
 
