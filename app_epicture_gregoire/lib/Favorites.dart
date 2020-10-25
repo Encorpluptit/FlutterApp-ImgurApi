@@ -17,7 +17,9 @@ class Favorites extends StatefulWidget {
 
 class _Favorites extends State<Favorites> {
   void reload() {
-    setState(() {widget.reload = !widget.reload;});
+    setState(() {
+      widget.reload = !widget.reload;
+    });
   }
 
   @override
@@ -32,17 +34,18 @@ class _Favorites extends State<Favorites> {
                   child: Wrap(
                       direction: Axis.vertical,
                       children: List.generate(
-                snapshot.data.length,
-                (index) {
-                  if (snapshot.data[index].in_gallery == false)
-                    return FavoriteImage(
-                      image: snapshot.data.elementAt(index),
-                      id: snapshot.data[index].id,
-                      reloadPage: (ImgurGallery obj) {snapshot.data.remove(obj);sleep(Duration(milliseconds: 750));reload();},
-                    );
-                  return Container();
-                },
-              )));
+                        snapshot.data.length,
+                        (index) {
+                          inspect(snapshot.data[index]);
+                          if (snapshot.data[index].in_gallery == false) {
+                            return FavoriteImage(
+                              image: snapshot.data.elementAt(index),
+                              id: snapshot.data[index - 1].id,
+                            );
+                          }
+                          return Container();
+                        },
+                      )));
             } else if (snapshot.hasError) {
               return Text("ERROR");
             }
@@ -55,9 +58,8 @@ class _Favorites extends State<Favorites> {
 class FavoriteImage extends StatefulWidget {
   String id;
   ImgurGallery image;
-  Function reloadPage;
 
-  FavoriteImage({this.image, this.id, this.reloadPage});
+  FavoriteImage({this.image, this.id});
 
   @override
   FavoriteImageState createState() => FavoriteImageState();
@@ -83,7 +85,6 @@ class FavoriteImageState extends State<FavoriteImage> {
                   builder: (_) => FavImageDialog(
                         image: widget.image,
                         id: widget.id,
-                        reloadPage: widget.reloadPage,
                       ));
             },
             child: Container(
@@ -102,9 +103,8 @@ class FavoriteImageState extends State<FavoriteImage> {
 class FavImageDialog extends StatefulWidget {
   ImgurGallery image;
   String id;
-  Function reloadPage;
 
-  FavImageDialog({this.image, this.id, this.reloadPage});
+  FavImageDialog({this.image, this.id});
 
   @override
   _FavImageDialog createState() => _FavImageDialog();
@@ -137,7 +137,6 @@ class _FavImageDialog extends State<FavImageDialog> {
           onPressed: () {
             widget.image.favGalery(widget.id);
             widget.image.images.first.favImage();
-            widget.reloadPage(widget.image);
             Navigator.of(context).pop();
           },
         ),
