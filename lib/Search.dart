@@ -29,6 +29,12 @@ class SearchState extends State<Search> {
         child: Column(children: [
           Container(height: 10),
           TextField(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
             controller: myController,
             onEditingComplete: () {
               widget.user

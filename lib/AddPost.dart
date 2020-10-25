@@ -27,8 +27,9 @@ class PostState extends State<AddPost> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: checkState(),
-    );
+        child: ListView(
+      children: [checkState()],
+    ));
   }
 
   _imgFromCamera() async {
@@ -38,7 +39,11 @@ class PostState extends State<AddPost> {
 
     setState(() {
       _image = image;
-      postState = 4;
+      if (_image == null) {
+        postState = 1;
+      } else {
+        postState = 4;
+      }
     });
   }
 
@@ -50,7 +55,11 @@ class PostState extends State<AddPost> {
 
     setState(() {
       _image = image;
-      postState = 4;
+      if (_image == null) {
+        postState = 1;
+      } else {
+        postState = 4;
+      }
     });
   }
 
