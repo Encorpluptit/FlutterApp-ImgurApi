@@ -1,9 +1,3 @@
-<style>
-img[src*='#center'] {
-    display: block;
-    margin: auto;
-}
-</style>
 
 # User Documentation
 
@@ -19,6 +13,9 @@ This application use Imgur Authentication. You must [log in](https://imgur.com/s
 
 You must connect to Imgur with your Username (or Email) and Password.
 
+<p align="center" width="100%">
+    <img width="33%" src=Ressources/2_ImgurLogin.png#center> 
+</p>
  ![Image in .github/assets](Ressources/2_ImgurLogin.png#center)
 
 Or use one of these available connection solution.
