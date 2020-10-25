@@ -60,7 +60,7 @@ class BasicCall {
   }
 
   Future<List<ImgurGallery>> getGallery({
-    String section = "hot",
+    String section = "top",
     String sort = "viral",
     String page = "0",
     String window = "day",
